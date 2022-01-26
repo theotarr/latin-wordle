@@ -15,6 +15,8 @@ import {
   saveGameStateToLocalStorage,
 } from './lib/localStorage'
 
+const DefinitionURL = `https://www.latindictionary.io/words/?word=${solution}`
+
 function App() {
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
@@ -99,7 +101,19 @@ function App() {
   return (
     <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div className="flex w-80 mx-auto items-center mb-8">
-        <h1 className="text-xl grow font-bold">Not Wordle</h1>
+        <div className="grow">
+          <h1 className="text-xl font-bold">Latin Wordle </h1>
+          by{' '}
+          <a
+            href="https://www.latindictionary.io"
+            target="_blank"
+            rel="noopenner"
+            className="font-bold"
+          >
+            latindictionary.io
+          </a>
+        </div>
+
         <InformationCircleIcon
           className="h-6 w-6 cursor-pointer"
           onClick={() => setIsInfoModalOpen(true)}
@@ -153,7 +167,15 @@ function App() {
       <Alert message="Not enough letters" isOpen={isNotEnoughLetters} />
       <Alert message="Word not found" isOpen={isWordNotFoundAlertOpen} />
       <Alert
-        message={`You lost, the word was ${solution}`}
+        message={`You lost, the word was ${solution}. View the definition of ${solution} on
+        <a
+          href=${DefinitionURL}
+          target="_blank"
+          rel="noopenner"
+          className="font-bold underline"
+        >
+          latindictionary.io.
+        </a>`}
         isOpen={isGameLost}
       />
       <Alert

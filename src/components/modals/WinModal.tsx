@@ -3,6 +3,8 @@ import { CheckIcon } from '@heroicons/react/outline'
 import { MiniGrid } from '../mini-grid/MiniGrid'
 import { shareStatus } from '../../lib/share'
 import { BaseModal } from './BaseModal'
+import { Definition } from '../definition/Definition'
+import { solution } from '../../lib/words'
 
 type Props = {
   isOpen: boolean
@@ -10,6 +12,8 @@ type Props = {
   guesses: string[]
   handleShare: () => void
 }
+
+const DefinitionURL = `https://www.latindictionary.io/words/?word=${solution}`
 
 export const WinModal = ({
   isOpen,
@@ -32,7 +36,18 @@ export const WinModal = ({
           </Dialog.Title>
           <div className="mt-2">
             <MiniGrid guesses={guesses} />
-            <p className="text-sm text-gray-500">Great job.</p>
+          </div>
+          <div className="mt-4">
+            View the definition of {solution} on{' '}
+            <a
+              href={DefinitionURL}
+              target="_blank"
+              rel="noopenner"
+              className="font-bold"
+            >
+              latindictionary.io
+            </a>
+            .
           </div>
         </div>
       </div>
