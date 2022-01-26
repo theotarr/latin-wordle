@@ -3,7 +3,7 @@ import { CheckIcon } from '@heroicons/react/outline'
 import { MiniGrid } from '../mini-grid/MiniGrid'
 import { shareStatus } from '../../lib/share'
 import { BaseModal } from './BaseModal'
-import { Definition } from '../definition/Definition'
+// import { Definition } from '../definition/Definition'
 import { solution } from '../../lib/words'
 
 type Props = {
@@ -42,7 +42,7 @@ export const WinModal = ({
             <a
               href={DefinitionURL}
               target="_blank"
-              rel="noopenner"
+              rel="noopenner noreferrer"
               className="font-bold"
             >
               latindictionary.io

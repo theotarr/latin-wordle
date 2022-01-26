@@ -107,7 +107,7 @@ function App() {
           <a
             href="https://www.latindictionary.io"
             target="_blank"
-            rel="noopenner"
+            rel="noopenner noreferrer"
             className="font-bold"
           >
             latindictionary.io
@@ -171,7 +171,7 @@ function App() {
         <a
           href=${DefinitionURL}
           target="_blank"
-          rel="noopenner"
+          rel="noopenner noreferrer"
           className="font-bold underline"
         >
           latindictionary.io.
