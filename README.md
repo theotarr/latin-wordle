@@ -7,7 +7,7 @@
     </a>
 </p>
 
-- Go play the real examining Wordle [here](https://www.powerlanguage.co.uk/wordle/)
+- Go play the real Wordle [here](https://www.powerlanguage.co.uk/wordle/)
 
 ## Inspiration
 
