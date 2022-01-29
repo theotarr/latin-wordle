@@ -5,7 +5,6 @@ export const WORDS = [
 'colli',
 'trias',
 'vimen',
-'banaa',
 'datio',
 'luctu',
 'dyone',
