@@ -26,7 +26,7 @@ export const WORDS = [
   'nimie',
   'votet',
   'colui',
-  'cudam',
+  'rasae',
   'cerer',
   'nonus',
   'urceo',
