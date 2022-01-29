@@ -14,7 +14,6 @@ export const WORDS = [
 'ovare',
 'botri',
 'cemsi',
-'aedil',
 'fumeo',
 'datis',
 'noflo',
