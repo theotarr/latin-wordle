@@ -29,25 +29,15 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
         Special Thanks
       </h2>
       <p className="text-sm text-gray-500 mt-2">
-        This project was created by:
+        Contributors:
         <ul className="mt-2">
           <li>
-            <a
-              href="https://github.com/theotarr/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold"
-            >
+            <a href="https://github.com/theotarr/" className="font-bold">
               Theo Tarr
             </a>
           </li>
           <li>
-            <a
-              href="https://github.com/stillabe/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold"
-            >
+            <a href="https://github.com/stillabe/" className="font-bold">
               stillabe
             </a>
           </li>
