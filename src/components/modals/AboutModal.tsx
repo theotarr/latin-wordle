@@ -24,6 +24,35 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
           play the original English version here.
         </a>
       </p>
+
+      <h2 className="text-lg leading-6 font-medium text-gray-900 mt-6">
+        Special Thanks
+      </h2>
+      <p className="text-sm text-gray-500 mt-2">
+        This project was created by:
+        <ul className="mt-2">
+          <li>
+            <a
+              href="https://github.com/theotarr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold"
+            >
+              Theo Tarr
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/stillabe/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold"
+            >
+              stillabe
+            </a>
+          </li>
+        </ul>
+      </p>
     </BaseModal>
   )
 }
