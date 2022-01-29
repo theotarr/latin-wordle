@@ -3,7 +3,6 @@ import { CheckIcon } from '@heroicons/react/outline'
 import { MiniGrid } from '../mini-grid/MiniGrid'
 import { shareStatus } from '../../lib/share'
 import { BaseModal } from './BaseModal'
-// import { Definition } from '../definition/Definition'
 import { solution } from '../../lib/words'
 
 type Props = {
