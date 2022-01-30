@@ -24,7 +24,7 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
           play the original English version here.
         </a>
       </p>
-
+      {/* 
       <h2 className="text-lg leading-6 font-medium text-gray-900 mt-6">
         Special Thanks
       </h2>
@@ -42,7 +42,7 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
             </a>
           </li>
         </ul>
-      </p>
+      </p> */}
     </BaseModal>
   )
 }
