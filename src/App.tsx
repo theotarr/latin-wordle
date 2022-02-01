@@ -1,5 +1,8 @@
-import { InformationCircleIcon } from '@heroicons/react/outline'
-import { ChartBarIcon } from '@heroicons/react/outline'
+import {
+  InformationCircleIcon,
+  ChartBarIcon,
+  RefreshIcon,
+} from '@heroicons/react/outline'
 import { useState, useEffect } from 'react'
 import { Alert } from './components/alerts/Alert'
 import { Grid } from './components/grid/Grid'
@@ -9,6 +12,7 @@ import { InfoModal } from './components/modals/InfoModal'
 import { WinModal } from './components/modals/WinModal'
 import { SignupModal } from './components/modals/SignupModal'
 import { StatsModal } from './components/modals/StatsModal'
+import { Tooltip } from './components/tooltip/Tooltip'
 import { isWordInWordList, isWinningWord, solution } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
@@ -133,15 +137,18 @@ function App() {
             latindictionary.io
           </a>
         </div>
-
-        <InformationCircleIcon
-          className="h-6 w-6 cursor-pointer"
-          onClick={() => setIsInfoModalOpen(true)}
-        />
-        <ChartBarIcon
-          className="h-6 w-6 cursor-pointer"
-          onClick={() => setIsStatsModalOpen(true)}
-        />
+        <Tooltip tooltipText="How To Play">
+          <InformationCircleIcon
+            className="h-6 w-6 cursor-pointer"
+            onClick={() => setIsInfoModalOpen(true)}
+          />
+        </Tooltip>
+        <Tooltip tooltipText="Stats">
+          <ChartBarIcon
+            className="h-6 w-6 cursor-pointer"
+            onClick={() => setIsStatsModalOpen(true)}
+          />
+        </Tooltip>
       </div>
       <Grid guesses={guesses} currentGuess={currentGuess} />
       <Keyboard
@@ -179,13 +186,30 @@ function App() {
         isOpen={isSignupModalOpen}
         handleClose={() => setIsSignupModalOpen(false)}
       />
-      <button
-        type="button"
-        className="mx-auto mt-8 flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"
-        onClick={() => setIsAboutModalOpen(true)}
-      >
-        About this game
-      </button>
+
+      <div className="flex justify-center gap-3 mt-8">
+        <button
+          type="button"
+          className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"
+          onClick={() => setIsAboutModalOpen(true)}
+        >
+          About
+          <InformationCircleIcon className="h-4 w-4 ml-1.5" />
+        </button>
+        <Tooltip tooltipText="Restart without saving progress">
+          <button
+            type="button"
+            className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 select-none"
+            onClick={() => {
+              setGuesses([])
+              window.location.reload()
+            }}
+          >
+            Restart
+            <RefreshIcon className="ml-1.5 h-4 w-4" />
+          </button>
+        </Tooltip>
+      </div>
 
       <Alert message="Not enough letters" isOpen={isNotEnoughLetters} />
       <Alert message="Word not found" isOpen={isWordNotFoundAlertOpen} />
