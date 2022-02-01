@@ -7,6 +7,7 @@ import { Keyboard } from './components/keyboard/Keyboard'
 import { AboutModal } from './components/modals/AboutModal'
 import { InfoModal } from './components/modals/InfoModal'
 import { WinModal } from './components/modals/WinModal'
+import { SignupModal } from './components/modals/SignupModal'
 import { StatsModal } from './components/modals/StatsModal'
 import { isWordInWordList, isWinningWord, solution } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
@@ -23,6 +24,7 @@ function App() {
   const [isWinModalOpen, setIsWinModalOpen] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
   const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
@@ -44,6 +46,24 @@ function App() {
   })
 
   const [stats, setStats] = useState(() => loadStats())
+
+  // Logic to show the signup modal
+  useEffect(() => {
+    let pageViews: Number
+
+    if (!localStorage.getItem('pageViews')) {
+      localStorage.setItem('pageViews', '1')
+      return
+    } else {
+      pageViews = parseInt(localStorage.getItem('pageViews')!) + 1
+      localStorage.setItem('pageViews', pageViews.toString())
+    }
+
+    if (pageViews > 3 && !localStorage.getItem('hasSignedUp')) {
+      setIsSignupModalOpen(true)
+      localStorage.setItem('pageViews', '0')
+    }
+  }, [])
 
   useEffect(() => {
     saveGameStateToLocalStorage({ guesses, solution })
@@ -155,7 +175,10 @@ function App() {
         isOpen={isAboutModalOpen}
         handleClose={() => setIsAboutModalOpen(false)}
       />
-
+      <SignupModal
+        isOpen={isSignupModalOpen}
+        handleClose={() => setIsSignupModalOpen(false)}
+      />
       <button
         type="button"
         className="mx-auto mt-8 flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"
