@@ -30,13 +30,11 @@ export const WinModal = ({
           <Dialog.Title
             as="h3"
             className="text-lg leading-6 font-medium text-gray-900"
-          >
-            You won!
-          </Dialog.Title>
+          ></Dialog.Title>
           <div className="mt-2">
             <MiniGrid guesses={guesses} />
           </div>
-          <div className="mt-4">
+          <div className="mt-4 dark:text-white">
             View the definition of {solution} on{' '}
             <a
               href={DefinitionURL}

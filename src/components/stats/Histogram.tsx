@@ -9,7 +9,7 @@ export const Histogram = ({ gameStats }: Props) => {
   const { totalGames, winDistribution } = gameStats
 
   return (
-    <div className="columns-1 justify-left m-2 text-sm">
+    <div className="columns-1 justify-left m-2 text-sm dark:text-gray-300">
       {winDistribution.map((value, i) => (
         <Progress
           key={i}

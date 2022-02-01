@@ -4,13 +4,16 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import ReactGA from 'react-ga'
+import { ThemeProvider } from './ThemeProvider'
 
 ReactGA.initialize('UA-215919527-1') // intialize Google Analytics to track site usage
 ReactGA.pageview(window.location.pathname) // track page view
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
