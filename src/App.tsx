@@ -24,7 +24,7 @@ function App() {
   const [isWinModalOpen, setIsWinModalOpen] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(true)
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
   const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
@@ -46,6 +46,24 @@ function App() {
   })
 
   const [stats, setStats] = useState(() => loadStats())
+
+  // Logic to show the signup modal
+  useEffect(() => {
+    let pageViews: Number
+
+    if (!localStorage.getItem('pageViews')) {
+      localStorage.setItem('pageViews', '1')
+      return
+    } else {
+      pageViews = parseInt(localStorage.getItem('pageViews')!) + 1
+      localStorage.setItem('pageViews', pageViews.toString())
+    }
+
+    if (pageViews > 3 && !localStorage.getItem('hasSignedUp')) {
+      setIsSignupModalOpen(true)
+      localStorage.setItem('pageViews', '0')
+    }
+  }, [])
 
   useEffect(() => {
     saveGameStateToLocalStorage({ guesses, solution })
