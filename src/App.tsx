@@ -25,6 +25,7 @@ const DefinitionURL = `https://www.latindictionary.io/words/?word=${solution}`
 function App() {
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
+  const [isGameLost, setIsGameLost] = useState(false)
   const [isWinModalOpen, setIsWinModalOpen] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
@@ -32,7 +33,6 @@ function App() {
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
   const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
-  const [isGameLost, setIsGameLost] = useState(false)
   const [shareComplete, setShareComplete] = useState(false)
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
@@ -196,13 +196,15 @@ function App() {
           About
           <InformationCircleIcon className="h-4 w-4 ml-1.5" />
         </button>
-        <Tooltip tooltipText="Restart without saving progress">
+        <Tooltip tooltipText="Restart after winning or losing">
           <button
             type="button"
             className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 select-none"
             onClick={() => {
-              setGuesses([])
-              window.location.reload()
+              if (isGameLost || isGameWon) {
+                setGuesses([])
+                window.location.reload()
+              }
             }}
           >
             Restart
