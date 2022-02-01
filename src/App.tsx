@@ -13,6 +13,7 @@ import { WinModal } from './components/modals/WinModal'
 import { SignupModal } from './components/modals/SignupModal'
 import { StatsModal } from './components/modals/StatsModal'
 import { Tooltip } from './components/tooltip/Tooltip'
+import { Toggle } from './components/toggle/Toggle'
 import { isWordInWordList, isWinningWord, solution } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
@@ -163,121 +164,124 @@ function App() {
   }
 
   return (
-    <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div className="flex w-80 mx-auto items-center mb-8">
-        <div className="grow">
-          <h1 className="text-xl font-bold">Latin Wordle </h1>
-          by{' '}
-          <a
-            href="https://www.latindictionary.io"
-            target="_blank"
-            rel="noopenner noreferrer"
-            className="font-bold"
-          >
-            latindictionary.io
-          </a>
-        </div>
-        <Tooltip tooltipText="How To Play">
+    <div className="text-black dark:text-white bg-white dark:bg-gray-900 transition-all">
+      <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="flex w-80 mx-auto items-center mb-8">
+          <div className="grow">
+            <h1 className="text-xl font-bold">Latin Wordle </h1>
+            by{' '}
+            <a
+              href="https://www.latindictionary.io"
+              target="_blank"
+              rel="noopenner noreferrer"
+              className="font-bold"
+            >
+              latindictionary.io
+            </a>
+          </div>
+          {/* <Tooltip tooltipText="How To Play"> */}
           <InformationCircleIcon
             className="h-6 w-6 cursor-pointer"
             onClick={() => setIsInfoModalOpen(true)}
           />
-        </Tooltip>
-        <Tooltip tooltipText="Stats">
+          {/* </Tooltip> */}
+          {/* <Tooltip tooltipText="Stats"> */}
           <ChartBarIcon
             className="h-6 w-6 cursor-pointer"
             onClick={() => setIsStatsModalOpen(true)}
           />
-        </Tooltip>
-      </div>
-      <Grid guesses={guesses} currentGuess={currentGuess} />
-      <Keyboard
-        onChar={onChar}
-        onDelete={onDelete}
-        onEnter={onEnter}
-        guesses={guesses}
-      />
-      <WinModal
-        isOpen={isWinModalOpen}
-        handleClose={() => setIsWinModalOpen(false)}
-        guesses={guesses}
-        handleShare={() => {
-          setIsWinModalOpen(false)
-          setShareComplete(true)
-          return setTimeout(() => {
-            setShareComplete(false)
-          }, 2000)
-        }}
-      />
-      <InfoModal
-        isOpen={isInfoModalOpen}
-        handleClose={() => setIsInfoModalOpen(false)}
-      />
-      <StatsModal
-        isOpen={isStatsModalOpen}
-        handleClose={() => setIsStatsModalOpen(false)}
-        gameStats={stats}
-      />
-      <AboutModal
-        isOpen={isAboutModalOpen}
-        handleClose={() => setIsAboutModalOpen(false)}
-      />
-      <SignupModal
-        isOpen={isSignupModalOpen}
-        handleClose={() => setIsSignupModalOpen(false)}
-      />
+          {/* </Tooltip> */}
+          <Toggle />
+        </div>
+        <Grid guesses={guesses} currentGuess={currentGuess} />
+        <Keyboard
+          onChar={onChar}
+          onDelete={onDelete}
+          onEnter={onEnter}
+          guesses={guesses}
+        />
+        <WinModal
+          isOpen={isWinModalOpen}
+          handleClose={() => setIsWinModalOpen(false)}
+          guesses={guesses}
+          handleShare={() => {
+            setIsWinModalOpen(false)
+            setShareComplete(true)
+            return setTimeout(() => {
+              setShareComplete(false)
+            }, 2000)
+          }}
+        />
+        <InfoModal
+          isOpen={isInfoModalOpen}
+          handleClose={() => setIsInfoModalOpen(false)}
+        />
+        <StatsModal
+          isOpen={isStatsModalOpen}
+          handleClose={() => setIsStatsModalOpen(false)}
+          gameStats={stats}
+        />
+        <AboutModal
+          isOpen={isAboutModalOpen}
+          handleClose={() => setIsAboutModalOpen(false)}
+        />
+        <SignupModal
+          isOpen={isSignupModalOpen}
+          handleClose={() => setIsSignupModalOpen(false)}
+        />
 
-      <div className="flex justify-center gap-3 mt-8">
-        <button
-          type="button"
-          className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"
-          onClick={() => setIsAboutModalOpen(true)}
-        >
-          About
-          <InformationCircleIcon className="h-4 w-4 ml-1.5" />
-        </button>
-        <Tooltip tooltipText="Restart after winning or losing">
+        <div className="flex justify-center gap-3 mt-8">
           <button
             type="button"
-            className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 select-none"
-            onClick={onReset}
+            className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"
+            onClick={() => setIsAboutModalOpen(true)}
           >
-            Restart
-            <RefreshIcon className="ml-1.5 h-4 w-4" />
+            About
+            <InformationCircleIcon className="h-4 w-4 ml-1.5" />
           </button>
-        </Tooltip>
-      </div>
+          <Tooltip tooltipText="Restart after winning or losing">
+            <button
+              type="button"
+              className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 select-none"
+              onClick={onReset}
+            >
+              Restart
+              <RefreshIcon className="ml-1.5 h-4 w-4" />
+            </button>
+          </Tooltip>
+        </div>
 
-      <Alert message="Not enough letters" isOpen={isNotEnoughLetters} />
-      <Alert message="Word not found" isOpen={isWordNotFoundAlertOpen} />
-      <Alert
-        message={`
-        <a
-          href=${DefinitionURL}
-          target="_blank"
-          rel="noopenner noreferrer"
-        >
-          You lost, the word was ${solution}. Click here to see the definition of ${solution} on latindictionary.io.
-        </a>`}
-        isOpen={isGameLost}
-      />
-      <Alert
-        message="Game copied to clipboard"
-        isOpen={shareComplete}
-        variant="success"
-      />
-      <Alert
-        message={`
-        <a
-          href="https://forms.gle/o61u5Z2BGZD4LohY7"
-          target="_blank"
-          rel="noopenner noreferrer"
-        >
-          We notice that you have been playing Wordle for a while, please fill out this feedback survey to help us improve the game.
-        </a>`}
-        isOpen={isGameWon && showForm}
-        variant="info"
-      />
+        <Alert message="Not enough letters" isOpen={isNotEnoughLetters} />
+        <Alert message="Word not found" isOpen={isWordNotFoundAlertOpen} />
+        <Alert
+          message={`
+            <a
+              href=${DefinitionURL}
+              target="_blank"
+              rel="noopenner noreferrer"
+            >
+              You lost, the word was ${solution}. Click here to see the definition of ${solution} on latindictionary.io.
+            </a>`}
+          isOpen={isGameLost}
+        />
+        <Alert
+          message="Game copied to clipboard"
+          isOpen={shareComplete}
+          variant="success"
+        />
+        <Alert
+          message={`
+            <a
+              href="https://forms.gle/o61u5Z2BGZD4LohY7"
+              target="_blank"
+              rel="noopenner noreferrer"
+            >
+              We notice that you have been playing Wordle for a while, please fill out this feedback survey to help us improve the game.
+            </a>`}
+          isOpen={isGameWon && showForm}
+          variant="info"
+        />
+      </div>
     </div>
   )
 }
