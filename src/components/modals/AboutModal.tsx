@@ -8,7 +8,7 @@ type Props = {
 export const AboutModal = ({ isOpen, handleClose }: Props) => {
   return (
     <BaseModal title="About" isOpen={isOpen} handleClose={handleClose}>
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-gray-500 dark:text-gray-300">
         This is an implementation of Wordle in Latin -{' '}
         <a
           href="https://github.com/theotarr/latin-wordle"
@@ -28,10 +28,10 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
           play the original English version here.
         </a>
       </p>
-      <h4 className="text-lg leading-6 font-medium text-gray-900 mt-6">
+      <h4 className="text-lg leading-6 font-medium text-gray-900 dark:text-white mt-6">
         Support Us
       </h4>
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-gray-500 dark:text-gray-300">
         If you find this useful, please sign up on{' '}
         <a
           href="https://www.latindictionary.io/"
@@ -43,10 +43,10 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
         </a>{' '}
         and share it with your friends!
       </p>
-      <h4 className="text-lg leading-6 font-medium text-gray-900 mt-6">
+      <h4 className="text-lg leading-6 font-medium text-gray-900 dark:text-white mt-6">
         Report a Problem
       </h4>
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-gray-500 dark:text-gray-300">
         If you find a problem, please contact{' '}
         <a
           href="mailto:support@latindictionary.io"
@@ -57,10 +57,10 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
           us.
         </a>
       </p>
-      <h2 className="text-lg leading-6 font-medium text-gray-900 mt-6">
+      <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-white mt-6">
         Feedback and Suggestions
       </h2>
-      <p className="text-sm text-gray-500 mt-2">
+      <p className="text-sm text-gray-500 dark:text-gray-300 mt-2">
         Please fill out this{' '}
         <a
           href="https://forms.gle/o61u5Z2BGZD4LohY7"

@@ -12,7 +12,7 @@ import { InfoModal } from './components/modals/InfoModal'
 import { WinModal } from './components/modals/WinModal'
 import { SignupModal } from './components/modals/SignupModal'
 import { StatsModal } from './components/modals/StatsModal'
-import { Tooltip } from './components/tooltip/Tooltip'
+// import { Tooltip } from './components/tooltip/Tooltip'
 import { Toggle } from './components/toggle/Toggle'
 import { isWordInWordList, isWinningWord, solution } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
@@ -239,29 +239,29 @@ function App() {
             About
             <InformationCircleIcon className="h-4 w-4 ml-1.5" />
           </button>
-          <Tooltip tooltipText="Restart after winning or losing">
-            <button
-              type="button"
-              className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 select-none"
-              onClick={onReset}
-            >
-              Restart
-              <RefreshIcon className="ml-1.5 h-4 w-4" />
-            </button>
-          </Tooltip>
+          {/* <Tooltip tooltipText="Restart after winning or losing"> */}
+          <button
+            type="button"
+            className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 select-none"
+            onClick={onReset}
+          >
+            Restart
+            <RefreshIcon className="ml-1.5 h-4 w-4" />
+          </button>
+          {/* </Tooltip> */}
         </div>
 
         <Alert message="Not enough letters" isOpen={isNotEnoughLetters} />
         <Alert message="Word not found" isOpen={isWordNotFoundAlertOpen} />
         <Alert
           message={`
-            <a
-              href=${DefinitionURL}
-              target="_blank"
-              rel="noopenner noreferrer"
-            >
-              You lost, the word was ${solution}. Click here to see the definition of ${solution} on latindictionary.io.
-            </a>`}
+              <a
+                href=${DefinitionURL}
+                target="_blank"
+                rel="noopenner noreferrer"
+              >
+                You lost, the word was ${solution}. Click here to see the definition of ${solution} on latindictionary.io.
+              </a>`}
           isOpen={isGameLost}
         />
         <Alert
@@ -271,13 +271,13 @@ function App() {
         />
         <Alert
           message={`
-            <a
-              href="https://forms.gle/o61u5Z2BGZD4LohY7"
-              target="_blank"
-              rel="noopenner noreferrer"
-            >
-              We notice that you have been playing Wordle for a while, please fill out this feedback survey to help us improve the game.
-            </a>`}
+              <a
+                href="https://forms.gle/o61u5Z2BGZD4LohY7"
+                target="_blank"
+                rel="noopenner noreferrer"
+              >
+                We notice that you have been playing Wordle for a while, please fill out this feedback survey to help us improve the game.
+              </a>`}
           isOpen={isGameWon && showForm}
           variant="info"
         />

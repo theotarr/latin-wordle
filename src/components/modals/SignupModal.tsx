@@ -18,7 +18,7 @@ export const SignupModal = ({ isOpen, handleClose }: Props) => {
         <div className="mx-auto my-4 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100">
           <UserAddIcon className="h-5 w-5 text-blue-600" aria-hidden="true" />
         </div>
-        <p>
+        <p className="dark:text-white">
           If you are enjoying playing Latin Wordle, please consider signing up
           to get access extra features, such as multi-word lookups and
           personalized word lists. It is completely <b>free</b>, and helps us to

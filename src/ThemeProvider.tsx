@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, createContext, useState } from 'react'
 
 const getInitialTheme = () => {
   if (typeof window !== 'undefined' && window.localStorage) {
@@ -18,7 +18,7 @@ export type ThemeContextType = {
   setTheme: (theme: string) => void
 }
 
-export const ThemeContext = React.createContext<ThemeContextType>({
+export const ThemeContext = createContext<ThemeContextType>({
   theme: getInitialTheme(),
   setTheme: () => {},
 })
@@ -29,7 +29,7 @@ interface Props {
 }
 
 export const ThemeProvider = ({ initialTheme, children }: Props) => {
-  const [theme, setTheme] = React.useState(getInitialTheme)
+  const [theme, setTheme] = useState(getInitialTheme)
 
   const checkTheme = (existing: string) => {
     const root = window.document.documentElement
@@ -45,7 +45,7 @@ export const ThemeProvider = ({ initialTheme, children }: Props) => {
     checkTheme(initialTheme)
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     checkTheme(theme)
   }, [theme])
 
