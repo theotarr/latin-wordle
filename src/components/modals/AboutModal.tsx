@@ -28,7 +28,7 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
           play the original English version here.
         </a>
       </p>
-      <h4 className="text-lg leading-6 font-medium text-gray-900 mt-3">
+      <h4 className="text-lg leading-6 font-medium text-gray-900 mt-6">
         Support Us
       </h4>
       <p className="text-sm text-gray-500">
@@ -43,7 +43,7 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
         </a>{' '}
         and share it with your friends!
       </p>
-      <h4 className="text-lg leading-6 font-medium text-gray-900 mt-3">
+      <h4 className="text-lg leading-6 font-medium text-gray-900 mt-6">
         Report a Problem
       </h4>
       <p className="text-sm text-gray-500">
@@ -57,25 +57,21 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
           us.
         </a>
       </p>
-      {/* 
       <h2 className="text-lg leading-6 font-medium text-gray-900 mt-6">
-        Special Thanks
+        Feedback and Suggestions
       </h2>
       <p className="text-sm text-gray-500 mt-2">
-        Contributors:
-        <ul className="mt-2">
-          <li>
-            <a href="https://github.com/theotarr/" className="font-bold">
-              Theo Tarr
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/stillabe/" className="font-bold">
-              stillabe
-            </a>
-          </li>
-        </ul>
-      </p> */}
+        Please fill out this{' '}
+        <a
+          href="https://forms.gle/o61u5Z2BGZD4LohY7"
+          target="_blank"
+          rel="noopenner noreferrer"
+          className="font-bold underline"
+        >
+          Google form
+        </a>{' '}
+        to let us know what you think.
+      </p>
     </BaseModal>
   )
 }

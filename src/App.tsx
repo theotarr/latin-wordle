@@ -41,6 +41,12 @@ function App() {
     return true
   })
 
+  const [showForm, setShowForm] = useState(() => {
+    const showForm = localStorage.getItem('showForm')
+    if (showForm == null) return true
+    return false
+  })
+
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
     if (loaded?.solution !== solution) {
@@ -85,6 +91,10 @@ function App() {
       setIsWinModalOpen(true)
     }
   }, [isGameWon])
+
+  useEffect(() => {
+    localStorage.setItem('showForm', 'false')
+  }, [showForm])
 
   const onChar = (value: string) => {
     if (currentGuess.length < 5 && guesses.length < 6 && !isGameWon) {
@@ -236,14 +246,13 @@ function App() {
       <Alert message="Not enough letters" isOpen={isNotEnoughLetters} />
       <Alert message="Word not found" isOpen={isWordNotFoundAlertOpen} />
       <Alert
-        message={`You lost, the word was ${solution}. View the definition of ${solution} on
+        message={`
         <a
           href=${DefinitionURL}
           target="_blank"
           rel="noopenner noreferrer"
-          className="font-bold underline"
         >
-          latindictionary.io.
+          You lost, the word was ${solution}. Click here to see the definition of ${solution} on latindictionary.io.
         </a>`}
         isOpen={isGameLost}
       />
@@ -251,6 +260,18 @@ function App() {
         message="Game copied to clipboard"
         isOpen={shareComplete}
         variant="success"
+      />
+      <Alert
+        message={`
+        <a
+          href="https://forms.gle/o61u5Z2BGZD4LohY7"
+          target="_blank"
+          rel="noopenner noreferrer"
+        >
+          We notice that you have been playing Wordle for a while, please fill out this feedback survey to help us improve the game.
+        </a>`}
+        isOpen={isGameWon && showForm}
+        variant="info"
       />
     </div>
   )
