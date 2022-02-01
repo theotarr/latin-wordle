@@ -1,5 +1,8 @@
-import { InformationCircleIcon } from '@heroicons/react/outline'
-import { ChartBarIcon } from '@heroicons/react/outline'
+import {
+  InformationCircleIcon,
+  ChartBarIcon,
+  RefreshIcon,
+} from '@heroicons/react/outline'
 import { useState, useEffect } from 'react'
 import { Alert } from './components/alerts/Alert'
 import { Grid } from './components/grid/Grid'
@@ -9,6 +12,7 @@ import { InfoModal } from './components/modals/InfoModal'
 import { WinModal } from './components/modals/WinModal'
 import { SignupModal } from './components/modals/SignupModal'
 import { StatsModal } from './components/modals/StatsModal'
+import { Tooltip } from './components/tooltip/Tooltip'
 import { isWordInWordList, isWinningWord, solution } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
@@ -21,6 +25,7 @@ const DefinitionURL = `https://www.latindictionary.io/words/?word=${solution}`
 function App() {
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
+  const [isGameLost, setIsGameLost] = useState(false)
   const [isWinModalOpen, setIsWinModalOpen] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
@@ -28,8 +33,20 @@ function App() {
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
   const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
-  const [isGameLost, setIsGameLost] = useState(false)
   const [shareComplete, setShareComplete] = useState(false)
+  const [restarted, setRestarted] = useState(() => {
+    const restartExpires = localStorage.getItem('gameReset')
+    if (!restartExpires) return false
+    if (new Date(restartExpires) < new Date()) return false
+    return true
+  })
+
+  const [showForm, setShowForm] = useState(() => {
+    const showForm = localStorage.getItem('showForm')
+    if (showForm == null) return true
+    return false
+  })
+
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
     if (loaded?.solution !== solution) {
@@ -75,6 +92,10 @@ function App() {
     }
   }, [isGameWon])
 
+  useEffect(() => {
+    localStorage.setItem('showForm', 'false')
+  }, [showForm])
+
   const onChar = (value: string) => {
     if (currentGuess.length < 5 && guesses.length < 6 && !isGameWon) {
       setCurrentGuess(`${currentGuess}${value}`)
@@ -107,14 +128,32 @@ function App() {
       setCurrentGuess('')
 
       if (winningWord) {
-        setStats(addStatsForCompletedGame(stats, guesses.length))
+        if (!restarted)
+          setStats(addStatsForCompletedGame(stats, guesses.length))
         return setIsGameWon(true)
       }
 
       if (guesses.length === 5) {
-        setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        if (!restarted)
+          setStats(addStatsForCompletedGame(stats, guesses.length + 1))
         setIsGameLost(true)
       }
+    }
+  }
+
+  const onReset = () => {
+    if (isGameWon || isGameLost) {
+      setGuesses([])
+      setIsGameLost(false)
+      setIsGameWon(false)
+      // set a localstorage item to indicate that the game has been reset so that stats are not counted twice in the same day
+      const now: Date = new Date()
+
+      localStorage.setItem(
+        'gameReset',
+        new Date(now.setHours(23, 59, 59, 999)).toString()
+      )
+      window.location.reload()
     }
   }
 
@@ -133,15 +172,18 @@ function App() {
             latindictionary.io
           </a>
         </div>
-
-        <InformationCircleIcon
-          className="h-6 w-6 cursor-pointer"
-          onClick={() => setIsInfoModalOpen(true)}
-        />
-        <ChartBarIcon
-          className="h-6 w-6 cursor-pointer"
-          onClick={() => setIsStatsModalOpen(true)}
-        />
+        <Tooltip tooltipText="How To Play">
+          <InformationCircleIcon
+            className="h-6 w-6 cursor-pointer"
+            onClick={() => setIsInfoModalOpen(true)}
+          />
+        </Tooltip>
+        <Tooltip tooltipText="Stats">
+          <ChartBarIcon
+            className="h-6 w-6 cursor-pointer"
+            onClick={() => setIsStatsModalOpen(true)}
+          />
+        </Tooltip>
       </div>
       <Grid guesses={guesses} currentGuess={currentGuess} />
       <Keyboard
@@ -179,25 +221,38 @@ function App() {
         isOpen={isSignupModalOpen}
         handleClose={() => setIsSignupModalOpen(false)}
       />
-      <button
-        type="button"
-        className="mx-auto mt-8 flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"
-        onClick={() => setIsAboutModalOpen(true)}
-      >
-        About this game
-      </button>
+
+      <div className="flex justify-center gap-3 mt-8">
+        <button
+          type="button"
+          className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"
+          onClick={() => setIsAboutModalOpen(true)}
+        >
+          About
+          <InformationCircleIcon className="h-4 w-4 ml-1.5" />
+        </button>
+        <Tooltip tooltipText="Restart after winning or losing">
+          <button
+            type="button"
+            className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 select-none"
+            onClick={onReset}
+          >
+            Restart
+            <RefreshIcon className="ml-1.5 h-4 w-4" />
+          </button>
+        </Tooltip>
+      </div>
 
       <Alert message="Not enough letters" isOpen={isNotEnoughLetters} />
       <Alert message="Word not found" isOpen={isWordNotFoundAlertOpen} />
       <Alert
-        message={`You lost, the word was ${solution}. View the definition of ${solution} on
+        message={`
         <a
           href=${DefinitionURL}
           target="_blank"
           rel="noopenner noreferrer"
-          className="font-bold underline"
         >
-          latindictionary.io.
+          You lost, the word was ${solution}. Click here to see the definition of ${solution} on latindictionary.io.
         </a>`}
         isOpen={isGameLost}
       />
@@ -205,6 +260,18 @@ function App() {
         message="Game copied to clipboard"
         isOpen={shareComplete}
         variant="success"
+      />
+      <Alert
+        message={`
+        <a
+          href="https://forms.gle/o61u5Z2BGZD4LohY7"
+          target="_blank"
+          rel="noopenner noreferrer"
+        >
+          We notice that you have been playing Wordle for a while, please fill out this feedback survey to help us improve the game.
+        </a>`}
+        isOpen={isGameWon && showForm}
+        variant="info"
       />
     </div>
   )

@@ -5,7 +5,7 @@ import classNames from 'classnames'
 type Props = {
   isOpen: boolean
   message: string
-  variant?: 'success' | 'warning'
+  variant?: 'success' | 'warning' | 'info'
 }
 
 export const Alert = ({ isOpen, message, variant = 'warning' }: Props) => {
@@ -14,6 +14,7 @@ export const Alert = ({ isOpen, message, variant = 'warning' }: Props) => {
     {
       'bg-rose-200': variant === 'warning',
       'bg-green-200': variant === 'success',
+      'bg-blue-200': variant === 'info',
     }
   )
 
