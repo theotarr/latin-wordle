@@ -34,6 +34,13 @@ function App() {
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
   const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
   const [shareComplete, setShareComplete] = useState(false)
+  const [restarted, setRestarted] = useState(() => {
+    const restartExpires = localStorage.getItem('gameReset')
+    if (!restartExpires) return false
+    if (new Date(restartExpires) < new Date()) return false
+    return true
+  })
+
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
     if (loaded?.solution !== solution) {
@@ -111,14 +118,32 @@ function App() {
       setCurrentGuess('')
 
       if (winningWord) {
-        setStats(addStatsForCompletedGame(stats, guesses.length))
+        if (!restarted)
+          setStats(addStatsForCompletedGame(stats, guesses.length))
         return setIsGameWon(true)
       }
 
       if (guesses.length === 5) {
-        setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        if (!restarted)
+          setStats(addStatsForCompletedGame(stats, guesses.length + 1))
         setIsGameLost(true)
       }
+    }
+  }
+
+  const onReset = () => {
+    if (isGameWon || isGameLost) {
+      setGuesses([])
+      setIsGameLost(false)
+      setIsGameWon(false)
+      // set a localstorage item to indicate that the game has been reset so that stats are not counted twice in the same day
+      const now: Date = new Date()
+
+      localStorage.setItem(
+        'gameReset',
+        new Date(now.setHours(23, 59, 59, 999)).toString()
+      )
+      window.location.reload()
     }
   }
 
@@ -200,12 +225,7 @@ function App() {
           <button
             type="button"
             className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 select-none"
-            onClick={() => {
-              if (isGameLost || isGameWon) {
-                setGuesses([])
-                window.location.reload()
-              }
-            }}
+            onClick={onReset}
           >
             Restart
             <RefreshIcon className="ml-1.5 h-4 w-4" />
