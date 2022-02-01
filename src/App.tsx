@@ -34,18 +34,23 @@ function App() {
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
   const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
   const [shareComplete, setShareComplete] = useState(false)
-  const [restarted, setRestarted] = useState(() => {
-    const restartExpires = localStorage.getItem('gameReset')
-    if (!restartExpires) return false
-    if (new Date(restartExpires) < new Date()) return false
-    return true
-  })
 
-  const [showForm, setShowForm] = useState(() => {
-    const showForm = localStorage.getItem('showForm')
-    if (showForm == null) return true
-    return false
-  })
+  let restarted = false
+  let restartExpires = localStorage.getItem('gameReset')
+
+  if (!restartExpires || new Date(restartExpires) < new Date()) {
+    restarted = false
+  } else {
+    restarted = true
+  }
+
+  let showForm = false
+
+  if (localStorage.getItem('showForm') == null) {
+    showForm = true
+  } else {
+    showForm = false
+  }
 
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
