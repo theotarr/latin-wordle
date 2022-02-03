@@ -1,27 +1,77 @@
-# Wordle Clone
+<h1 align="center"> 
+    Latin Wordle
+</h1>
+<p align=center>
+    <a href="https://wordle.latindictionary.io/">
+        Live Game Here
+    </a>
+</p>
 
-- Go play the real Wordle [here](https://www.powerlanguage.co.uk/wordle/)
-- Read the story behind it [here](https://www.nytimes.com/2022/01/03/technology/wordle-word-game-creator.html)
-- Try a demo of this clone project [here](https://61dc4dbf9f2b9d0007925c02--thirsty-hoover-08af60.netlify.app/)
+## Inspiration
 
-_Inspiration:_
-This game is an open source clone of the immensely popular online word guessing game Wordle. Like many others all over the world, I saw the signature pattern of green, yellow, and white squares popping up all over social media and the web and had to check it out. After a few days of play, I decided it would be great for my learning to try to rebuild Wordle in React!
+Latin Wordle is a free and open-source project that aims to provide a fun and interactive way to learn Latin. I was inspired by the real version (linked above), and decided to make my own version for latindictionary.io. Please feel free to contribute to the project, and if you have any suggestions, please let me know!
+Also, go play the real (English) Wordle [here](https://www.powerlanguage.co.uk/wordle/).
 
-_Design Decisions:_
-I used a combination of React, Typescript, and Tailwind to build this Wordle Clone. When examining the original Wordle, I assumed the list might come from an external API or database, but after investigating in chrome dev tools I found that the list of words is simply stored in an array on the front end. I'm using the same list as the OG Wordle uses, but watch out for spoilers if you go find the file in this repo! The word match functionality is simple: the word array index increments each day from a fixed game epoch timestamp (only one puzzle per day!) roughly like so:
+## Forking This Repo
+
+There are no copyright restrictions on this project, so feel free to fork and use it for your own purposes. Although it you deploy this website publically we do require an **attribution** and link to our site.
+
+### Tech Stack
+
+This project was built using [React](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/), and [Tailwind UI](https://tailwindui.com/). There is no backend or database used because the word list is stored on the frontend.
+
+### Contributing
+
+If you would like to contribute to the project, please create your own branch and submit a pull request to the main branch when you are done working.
+
+### Pruning the Word List
+
+We are in the middle of pruning the very difficult words from the `wordlist.ts` so all players can have some chance at guessing the word within six guesses. We are focussing on purging words that have 3 or more consonants in a row, or forms that are very rare. If you would like to help, you can go through the process or creating your own branch or just submit a Github issue with the words that you think should be purged.
+
+### File Structure
+```
+latin-wordle
+|   README.md, LICENSE, configs, etc.
+|  
+|───public (all the public and search engine data)
+|   |   favicon.ico
+|   |   logo.png
+|   |   sitemap.xml
+|
+|───src
+|   |   App.tsx
+|   |   index.css
+|   |   index.tsx
+|   |   
+|   |───components
+|   |   |   alerts
+|   |   |   grid
+|   |   |   keyboard
+|   |   |   mini-grid
+|   |   |   modals
+|   |   |   stats
+|   |
+|   |───constants (word list and valid guesses)
+|   |   |   validGuesses.ts
+|   |   |   wordlist.ts
+|   |
+|   |───lib (utility and other functions)
+|   |   |   keyboard.ts
+|   |   |   localStorage.ts
+|   |   |   share.ts
+|   |   |   stats.ts
+|   |   |   statuses.ts
+|   |   |   words.ts
 
 ```
-WORDS[Math.floor((NOW_IN_MS - GAME_EPOCH_IN_MS) / ONE_DAY_IN_MS)]
-```
 
-React enabled me to componentize the littlest parts of the game - keys and letter cells - and use them as the building blocks for the keyboard, word grid, and winning solution graphic. As for handling state, I used the built in useState and useEffect hooks to track guesses, whether the game is won, and to conditionally render popups.
 
-In addition to other things, Typescript helped ensure type safety for the statuses of each guessed letter, which were used in many areas of the app and needed to be accurate for the game to work correctly.
+### To Run Locally
 
-I implemented Tailwind mostly because I wanted to learn how to use Tailwind CSS, but I also took advantage of [Tailwind UI](https://tailwindui.com/) with their [headless package](https://headlessui.dev/) to build the modals and notifications. This was such an easy way to build simple popups for how to play, winning the game, and invalid words.
-
-_To Run Locally:_
 Clone the repository and perform the following command line actions:
 
-- npm init
-- npm run start
+```bash
+$ cd latin-wordle
+$ npm install
+$ npm run start
+```

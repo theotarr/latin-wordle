@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body > #root > div {
+  height: 100vh;
+}
+
+.cell-animation {
+  animation: revealCharCell linear;
+  animation-duration: 0.15s;
+}
+
+@keyframes revealCharCell {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
