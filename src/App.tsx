@@ -2,8 +2,10 @@ import {
   InformationCircleIcon,
   ChartBarIcon,
   RefreshIcon,
+  SunIcon,
+  MoonIcon,
 } from '@heroicons/react/outline'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Alert } from './components/alerts/Alert'
 import { Grid } from './components/grid/Grid'
 import { Keyboard } from './components/keyboard/Keyboard'
@@ -12,8 +14,7 @@ import { InfoModal } from './components/modals/InfoModal'
 import { WinModal } from './components/modals/WinModal'
 import { SignupModal } from './components/modals/SignupModal'
 import { StatsModal } from './components/modals/StatsModal'
-// import { Tooltip } from './components/tooltip/Tooltip'
-import { Toggle } from './components/toggle/Toggle'
+import { ThemeContext } from './ThemeProvider'
 import { isWordInWordList, isWinningWord, solution } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
@@ -24,6 +25,7 @@ import {
 const DefinitionURL = `https://www.latindictionary.io/words/?word=${solution}`
 
 function App() {
+  const { theme, setTheme } = useContext(ThemeContext)
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
   const [isGameLost, setIsGameLost] = useState(false)
@@ -167,7 +169,7 @@ function App() {
     <div className="text-black dark:text-white bg-white dark:bg-gray-900 transition-all">
       <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="flex w-80 mx-auto items-center mb-8">
-          <div className="grow">
+          <div className="ml-2.5 grow">
             <h1 className="text-xl font-bold">Latin Wordle </h1>
             by{' '}
             <a
@@ -179,19 +181,29 @@ function App() {
               latindictionary.io
             </a>
           </div>
-          {/* <Tooltip tooltipText="How To Play"> */}
           <InformationCircleIcon
             className="h-6 w-6 cursor-pointer"
             onClick={() => setIsInfoModalOpen(true)}
           />
-          {/* </Tooltip> */}
-          {/* <Tooltip tooltipText="Stats"> */}
           <ChartBarIcon
             className="h-6 w-6 cursor-pointer"
             onClick={() => setIsStatsModalOpen(true)}
           />
-          {/* </Tooltip> */}
-          <Toggle />
+          {theme === 'dark' ? (
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="text-black dark:text-white shadow-none p-2 focus:outline-none text-lg rounded-full outline-none ring-transparent cursor-pointer"
+            >
+              <SunIcon className="h-6 w-6 -ml-1" />
+            </button>
+          ) : (
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="text-black dark:text-white focus:outline-none shadow-none p-2 text-lg rounded-full outline-none ring-transparent cursor-pointer"
+            >
+              <MoonIcon className="h-6 w-6 -ml-1" />
+            </button>
+          )}
         </div>
         <Grid guesses={guesses} currentGuess={currentGuess} />
         <Keyboard
