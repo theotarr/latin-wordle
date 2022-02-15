@@ -232,6 +232,15 @@ function App() {
           isOpen={isStatsModalOpen}
           handleClose={() => setIsStatsModalOpen(false)}
           gameStats={stats}
+          guesses={guesses}
+          isGameLost={isGameLost}
+          isGameWon={isGameWon}
+          handleShare={() => {
+            setShareComplete(true)
+            return setTimeout(() => {
+              setShareComplete(false)
+            }, 2000)
+          }}
         />
         <AboutModal
           isOpen={isAboutModalOpen}
