@@ -55,7 +55,6 @@ export const WORDS = [
   'culex',
   'glube',
   'abavo',
-  'urano',
   'clivo',
   'ludit',
   'inita',
