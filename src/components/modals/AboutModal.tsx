@@ -63,7 +63,7 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
       <p className="text-sm text-gray-500 dark:text-gray-300 mt-2">
         Please fill out this{' '}
         <a
-          href="https://forms.gle/o61u5Z2BGZD4LohY7"
+          href="https://forms.gle/uLetKmvMcoAPNDxW9"
           target="_blank"
           rel="noopenner noreferrer"
           className="font-bold underline"
