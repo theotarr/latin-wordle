@@ -72,7 +72,6 @@ export const WORDS = [
   'socri',
   'adimo',
   'fetis',
-  'arium',
   'obsis',
   'maneo',
   'summi',
