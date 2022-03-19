@@ -76,7 +76,6 @@ export const WORDS = [
   'maneo',
   'summi',
   'pudor',
-  'foret',
   'licia',
   'aevum',
   'lanea',
