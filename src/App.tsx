@@ -96,7 +96,9 @@ function App() {
 
   useEffect(() => {
     if (isGameWon) {
-      setIsWinModalOpen(true)
+      // We wait a couple of seconds to allow the "reveal" animations to complete.
+      const timeoutId = setTimeout(() => setIsWinModalOpen(true), 2000)
+      return () => clearTimeout(timeoutId)
     }
   }, [isGameWon])
 
@@ -194,14 +196,14 @@ function App() {
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="text-black dark:text-white shadow-none p-2 focus:outline-none text-lg rounded-full outline-none ring-transparent cursor-pointer"
             >
-              <SunIcon className="h-6 w-6 -ml-1" />
+              <SunIcon className="h-6 w-6 -ml-2" />
             </button>
           ) : (
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="text-black dark:text-white focus:outline-none shadow-none p-2 text-lg rounded-full outline-none ring-transparent cursor-pointer"
             >
-              <MoonIcon className="h-6 w-6 -ml-1" />
+              <MoonIcon className="h-6 w-6 -ml-2" />
             </button>
           )}
         </div>
