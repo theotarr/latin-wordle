@@ -96,7 +96,9 @@ function App() {
 
   useEffect(() => {
     if (isGameWon) {
-      setIsWinModalOpen(true)
+      // We wait a couple of seconds to allow the "reveal" animations to complete.
+      const timeoutId = setTimeout(() => setIsWinModalOpen(true), 2000)
+      return () => clearTimeout(timeoutId)
     }
   }, [isGameWon])
 
