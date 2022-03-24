@@ -47,14 +47,6 @@ function App() {
     restarted = true
   }
 
-  let showForm = false
-
-  if (localStorage.getItem('showForm') == null) {
-    showForm = true
-  } else {
-    showForm = false
-  }
-
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
     if (loaded?.solution !== solution) {
@@ -101,10 +93,6 @@ function App() {
       return () => clearTimeout(timeoutId)
     }
   }, [isGameWon])
-
-  useEffect(() => {
-    localStorage.setItem('showForm', 'false')
-  }, [showForm])
 
   const onChar = (value: string) => {
     if (currentGuess.length < 5 && guesses.length < 6 && !isGameWon) {
@@ -291,18 +279,6 @@ function App() {
           message="Game copied to clipboard"
           isOpen={shareComplete}
           variant="success"
-        />
-        <Alert
-          message={`
-              <a
-                href="https://forms.gle/o61u5Z2BGZD4LohY7"
-                target="_blank"
-                rel="noopenner noreferrer"
-              >
-                We notice that you have been playing Wordle for a while, please fill out this feedback survey to help us improve the game.
-              </a>`}
-          isOpen={isGameWon && showForm}
-          variant="info"
         />
       </div>
     </div>
