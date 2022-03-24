@@ -196,14 +196,14 @@ function App() {
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="text-black dark:text-white shadow-none p-2 focus:outline-none text-lg rounded-full outline-none ring-transparent cursor-pointer"
             >
-              <SunIcon className="h-6 w-6 -ml-1" />
+              <SunIcon className="h-6 w-6 -ml-2" />
             </button>
           ) : (
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="text-black dark:text-white focus:outline-none shadow-none p-2 text-lg rounded-full outline-none ring-transparent cursor-pointer"
             >
-              <MoonIcon className="h-6 w-6 -ml-1" />
+              <MoonIcon className="h-6 w-6 -ml-2" />
             </button>
           )}
         </div>
