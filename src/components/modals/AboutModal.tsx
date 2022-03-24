@@ -57,21 +57,6 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
           us.
         </a>
       </p>
-      <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-white mt-6">
-        Feedback and Suggestions
-      </h2>
-      <p className="text-sm text-gray-500 dark:text-gray-300 mt-2">
-        Please fill out this{' '}
-        <a
-          href="https://forms.gle/o61u5Z2BGZD4LohY7"
-          target="_blank"
-          rel="noopenner noreferrer"
-          className="font-bold underline"
-        >
-          Google form
-        </a>{' '}
-        to let us know what you think.
-      </p>
     </BaseModal>
   )
 }

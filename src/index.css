@@ -24,3 +24,53 @@ body > #root > div {
     transform: scale(1);
   }
 }
+
+
+.cell-noindex,
+.cell-0 {
+  --cell-index: 0;
+}
+.cell-1 {
+  --cell-index: 1;
+}
+.cell-2 {
+  --cell-index: 2;
+}
+.cell-3 {
+  --cell-index: 3;
+}
+.cell-4 {
+  --cell-index: 4;
+}
+
+
+.revealing-status1 {
+  animation: revealCharStatus1 ease-in;
+  animation-duration: 0.25s;
+  animation-delay: calc(0.25s * var(--cell-index))
+}
+
+.revealing-status2 {
+  animation: revealCharStatus2 ease-in;
+  animation-duration: 0.25s;
+}
+
+@keyframes revealCharStatus1 {
+  from {
+    transform: none;
+  }
+  
+  to {
+    transform: rotateX(-90deg);
+  }
+}
+
+@keyframes revealCharStatus2 {
+  from {
+    transform: rotateX(-90deg);
+  }
+  
+  to {
+    transform: none;
+  }
+}
