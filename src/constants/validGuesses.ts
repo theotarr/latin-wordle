@@ -15842,4 +15842,6 @@ export const VALIDGUESSES = [
   'zytho',
   'zzuzm',
   'agito',
+  'glire',
+  'gliri',
 ]
