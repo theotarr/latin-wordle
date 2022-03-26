@@ -15,14 +15,18 @@ import { WinModal } from './components/modals/WinModal'
 import { SignupModal } from './components/modals/SignupModal'
 import { StatsModal } from './components/modals/StatsModal'
 import { ThemeContext } from './ThemeProvider'
-import { isWordInWordList, isWinningWord, solution } from './lib/words'
+import {
+  isWordInWordList,
+  isWinningWord,
+  solution,
+  getWordOfDay,
+  getLatinDefinition,
+} from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
 } from './lib/localStorage'
-
-const DefinitionURL = `https://www.latindictionary.io/words/?word=${solution}`
 
 function App() {
   const { theme, setTheme } = useContext(ThemeContext)
@@ -157,13 +161,9 @@ function App() {
       setIsGameLost(false)
       setIsGameWon(false)
       // set a localstorage item to indicate that the game has been reset so that stats are not counted twice in the same day
-      const now: Date = new Date()
-
-      localStorage.setItem(
-        'gameReset',
-        new Date(now.setHours(23, 59, 59, 999)).toString()
-      )
-      window.location.reload()
+      const { tomorrow } = getWordOfDay()
+      localStorage.setItem('gameReset', new Date(tomorrow).toString())
+      window.location.reload() // reload the page to reset the game
     }
   }
 
@@ -279,7 +279,7 @@ function App() {
         <Alert
           message={`
               <a
-                href=${DefinitionURL}
+                href=${getLatinDefinition(solution)}
                 target="_blank"
                 rel="noopenner noreferrer"
               >
@@ -291,18 +291,6 @@ function App() {
           message="Game copied to clipboard"
           isOpen={shareComplete}
           variant="success"
-        />
-        <Alert
-          message={`
-              <a
-                href="https://forms.gle/o61u5Z2BGZD4LohY7"
-                target="_blank"
-                rel="noopenner noreferrer"
-              >
-                We notice that you have been playing Wordle for a while, please fill out this feedback survey to help us improve the game.
-              </a>`}
-          isOpen={isGameWon && showForm}
-          variant="info"
         />
       </div>
     </div>
