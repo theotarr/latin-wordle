@@ -19,7 +19,7 @@ import {
   isWordInWordList,
   isWinningWord,
   solution,
-  getWordOfDay,
+  tomorrow,
   getLatinDefinition,
 } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
@@ -161,7 +161,6 @@ function App() {
       setIsGameLost(false)
       setIsGameWon(false)
       // set a localstorage item to indicate that the game has been reset so that stats are not counted twice in the same day
-      const { tomorrow } = getWordOfDay()
       localStorage.setItem('gameReset', new Date(tomorrow).toString())
       window.location.reload() // reload the page to reset the game
     }
