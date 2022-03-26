@@ -20,14 +20,13 @@ import {
   isWinningWord,
   solution,
   getWordOfDay,
+  getLatinDefinition,
 } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
 } from './lib/localStorage'
-
-const DefinitionURL = `https://www.latindictionary.io/words/?word=${solution}`
 
 function App() {
   const { theme, setTheme } = useContext(ThemeContext)
@@ -280,7 +279,7 @@ function App() {
         <Alert
           message={`
               <a
-                href=${DefinitionURL}
+                href=${getLatinDefinition(solution)}
                 target="_blank"
                 rel="noopenner noreferrer"
               >
