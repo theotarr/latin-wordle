@@ -292,18 +292,6 @@ function App() {
           isOpen={shareComplete}
           variant="success"
         />
-        <Alert
-          message={`
-              <a
-                href="https://forms.gle/o61u5Z2BGZD4LohY7"
-                target="_blank"
-                rel="noopenner noreferrer"
-              >
-                We notice that you have been playing Wordle for a while, please fill out this feedback survey to help us improve the game.
-              </a>`}
-          isOpen={isGameWon && showForm}
-          variant="info"
-        />
       </div>
     </div>
   )
