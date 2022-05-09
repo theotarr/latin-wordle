@@ -127,8 +127,6 @@ export const WORDS = [
   'poste',
   'numas',
   'sexto',
-  'toxeu',
-  'angio',
   'extat',
   'agmen',
   'turre',
