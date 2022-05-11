@@ -129,7 +129,6 @@ export const WORDS = [
   'sexto',
   'extat',
   'agmen',
-  'turre',
   'capio',
   'atque',
   'etiam',
