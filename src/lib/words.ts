@@ -12,18 +12,30 @@ export const isWinningWord = (word: string) => {
   return solution === word
 }
 
+export const getLatinDefinition = (word: string) => {
+  return `https://www.latindictionary.io/words/?word=${word}`
+}
+
 export const getWordOfDay = () => {
   // January 1, 2022 Game Epoch
-  const epochMs = 1641013200000
-  const now = Date.now()
-  const msInDay = 86400000
-  const index = Math.floor((now - epochMs) / msInDay)
-  const nextday = (index + 1) * msInDay + epochMs
+  const epoch = new Date(2022, 0)
+  const start = new Date(epoch)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  let index = 0
+  while (start < today) {
+    index++
+    start.setDate(start.getDate() + 1)
+  }
+
+  const nextDay = new Date(today)
+  nextDay.setDate(today.getDate() + 1)
 
   return {
     solution: WORDS[index].toUpperCase(),
     solutionIndex: index,
-    tomorrow: nextday,
+    tomorrow: nextDay,
   }
 }
 

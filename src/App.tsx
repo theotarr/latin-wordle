@@ -15,14 +15,18 @@ import { WinModal } from './components/modals/WinModal'
 import { SignupModal } from './components/modals/SignupModal'
 import { StatsModal } from './components/modals/StatsModal'
 import { ThemeContext } from './ThemeProvider'
-import { isWordInWordList, isWinningWord, solution } from './lib/words'
+import {
+  isWordInWordList,
+  isWinningWord,
+  solution,
+  tomorrow,
+  getLatinDefinition,
+} from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
 } from './lib/localStorage'
-
-const DefinitionURL = `https://www.latindictionary.io/words/?word=${solution}`
 
 function App() {
   const { theme, setTheme } = useContext(ThemeContext)
@@ -145,13 +149,8 @@ function App() {
       setIsGameLost(false)
       setIsGameWon(false)
       // set a localstorage item to indicate that the game has been reset so that stats are not counted twice in the same day
-      const now: Date = new Date()
-
-      localStorage.setItem(
-        'gameReset',
-        new Date(now.setHours(23, 59, 59, 999)).toString()
-      )
-      window.location.reload()
+      localStorage.setItem('gameReset', new Date(tomorrow).toString())
+      window.location.reload() // reload the page to reset the game
     }
   }
 
@@ -265,7 +264,7 @@ function App() {
         <Alert
           message={`
               <a
-                href=${DefinitionURL}
+                href=${getLatinDefinition(solution)}
                 target="_blank"
                 rel="noopenner noreferrer"
               >
