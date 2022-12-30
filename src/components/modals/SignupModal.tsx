@@ -26,7 +26,7 @@ export const SignupModal = ({ isOpen, handleClose }: Props) => {
         </p>
         <div className="mt-5 sm:mt-6">
           <a
-            href="https://www.latindictionary.io/register"
+            href="https://www.latindictionary.io/auth/signin"
             target="_blank"
             rel="noopenner noreferrer"
           >
