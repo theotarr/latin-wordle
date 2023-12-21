@@ -2,7 +2,7 @@
     <img src="https://www.latindictionary.io/static/assets/img/favicon/mstile-150x150.png" width=200 height=200/>
 </p>
 <h1 align="center"> 
-    Latin Wordle
+    Latin Verbdum
 </h1>
 <p align=center>
     <a href="https://wordle.latindictionary.io/">
@@ -12,7 +12,7 @@
 
 ## Inspiration
 
-Latin Wordle is a free and open-source project that aims to provide a fun and interactive way to learn Latin. I was inspired by the real version (linked above), and decided to make my own version for latindictionary.io. Please feel free to contribute to the project, and if you have any suggestions, please let me know!
+Latin Verbdum is a free and open-source project that aims to provide a fun and interactive way to learn Latin. I was inspired by the real version (linked above), and decided to make my own version for latindictionary.io. Please feel free to contribute to the project, and if you have any suggestions, please let me know!
 
 ## Forking This Repo
 
