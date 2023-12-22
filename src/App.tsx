@@ -70,7 +70,7 @@ function App() {
 
   // Logic to show the signup modal
   useEffect(() => {
-    let pageViews: Number
+    let pageViews = 0
 
     if (!localStorage.getItem('pageViews')) {
       localStorage.setItem('pageViews', '1')
@@ -171,11 +171,11 @@ function App() {
             </a>
           </div>
           <InformationCircleIcon
-            className="h-6 w-6 cursor-pointer"
+            className="h-6 w-6 mr-1 cursor-pointer"
             onClick={() => setIsInfoModalOpen(true)}
           />
           <ChartBarIcon
-            className="h-6 w-6 cursor-pointer"
+            className="h-6 w-6 mr-1 cursor-pointer"
             onClick={() => setIsStatsModalOpen(true)}
           />
           {theme === 'dark' ? (
