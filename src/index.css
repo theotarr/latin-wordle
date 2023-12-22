@@ -6,6 +6,13 @@ body > #root > div {
   height: 100vh;
 }
 
+/*not sure why its like this, but whit space comes back if not 100%*/
+@media only screen and (max-width: 600px) {
+  body > #root > div {
+    height: 100%;
+  }
+}
+
 .cell-animation {
   animation: revealCharCell linear;
   animation-duration: 0.15s;
@@ -25,7 +32,6 @@ body > #root > div {
   }
 }
 
-
 .cell-noindex,
 .cell-0 {
   --cell-index: 0;
@@ -43,11 +49,10 @@ body > #root > div {
   --cell-index: 4;
 }
 
-
 .revealing-status1 {
   animation: revealCharStatus1 ease-in;
   animation-duration: 0.25s;
-  animation-delay: calc(0.25s * var(--cell-index))
+  animation-delay: calc(0.25s * var(--cell-index));
 }
 
 .revealing-status2 {
@@ -59,7 +64,7 @@ body > #root > div {
   from {
     transform: none;
   }
-  
+
   to {
     transform: rotateX(-90deg);
   }
@@ -69,7 +74,7 @@ body > #root > div {
   from {
     transform: rotateX(-90deg);
   }
-  
+
   to {
     transform: none;
   }

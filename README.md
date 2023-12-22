@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://www.latindictionary.io/static/assets/img/favicon/mstile-150x150.png" width=200 height=200/>
+    <img src="https://www.latindictionary.io/mstile-150x150.png" width=200 height=200/>
 </p>
 <h1 align="center"> 
     Latin Word Game
