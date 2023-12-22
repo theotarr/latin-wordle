@@ -51,6 +51,14 @@ function App() {
     restarted = true
   }
 
+  let showForm = false
+
+  if (localStorage.getItem('showForm') == null) {
+    showForm = true
+  } else {
+    showForm = false
+  }
+
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
     if (loaded?.solution !== solution) {
@@ -70,7 +78,7 @@ function App() {
 
   // Logic to show the signup modal
   useEffect(() => {
-    let pageViews = 0
+    let pageViews: Number
 
     if (!localStorage.getItem('pageViews')) {
       localStorage.setItem('pageViews', '1')
@@ -97,6 +105,10 @@ function App() {
       return () => clearTimeout(timeoutId)
     }
   }, [isGameWon])
+
+  useEffect(() => {
+    localStorage.setItem('showForm', 'false')
+  }, [showForm])
 
   const onChar = (value: string) => {
     if (currentGuess.length < 5 && guesses.length < 6 && !isGameWon) {
@@ -156,7 +168,7 @@ function App() {
 
   return (
     <div className="text-black dark:text-white bg-white dark:bg-gray-900 transition-all">
-      <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="pt-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="flex w-80 mx-auto items-center mb-8">
           <div className="ml-2.5 grow">
             <h1 className="text-xl font-bold">Latin Word Game </h1>
@@ -249,6 +261,7 @@ function App() {
             About
             <InformationCircleIcon className="h-4 w-4 ml-1.5" />
           </button>
+          {/* <Tooltip tooltipText="Restart after winning or losing"> */}
           <button
             type="button"
             className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 select-none"
@@ -257,6 +270,7 @@ function App() {
             Restart
             <RefreshIcon className="ml-1.5 h-4 w-4" />
           </button>
+          {/* </Tooltip> */}
         </div>
 
         <Alert message="Not enough letters" isOpen={isNotEnoughLetters} />
