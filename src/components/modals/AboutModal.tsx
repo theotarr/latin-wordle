@@ -9,23 +9,15 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
   return (
     <BaseModal title="About" isOpen={isOpen} handleClose={handleClose}>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        This is an implementation of Wordle in Latin -{' '}
+        This is a fun word game in Latin (not affiliated with the NY Time's
+        Wordle). Check out the
         <a
           href="https://github.com/theotarr/latin-wordle"
-          className="underline font-bold"
+          className="underline font-bold ml-1"
           target="_blank"
           rel="noopener noreferrer"
         >
-          check out the code here
-        </a>{' '}
-        and{' '}
-        <a
-          href="https://www.powerlanguage.co.uk/wordle/"
-          className="underline font-bold"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          play the original English version here.
+          source code here.
         </a>
       </p>
       <h4 className="text-lg leading-6 font-medium text-gray-900 dark:text-white mt-6">

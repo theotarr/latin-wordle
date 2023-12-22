@@ -19,7 +19,7 @@ export const SignupModal = ({ isOpen, handleClose }: Props) => {
           <UserAddIcon className="h-5 w-5 text-blue-600" aria-hidden="true" />
         </div>
         <p className="dark:text-white">
-          If you are enjoying playing Latin Wordle, please consider signing up
+          If you are enjoying playing Latin Verbum, please consider signing up
           to get access extra features, such as multi-word lookups and
           personalized word lists. It is completely <b>free</b>, and helps us to
           continue improving our games and services.

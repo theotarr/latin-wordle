@@ -171,8 +171,8 @@ function App() {
       <div className="pt-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="flex w-80 mx-auto items-center mb-8">
           <div className="ml-2.5 grow">
-            <h1 className="text-xl font-bold">Latin Wordle </h1>
-            by{" "}
+            <h1 className="text-xl font-bold">Latin Word Game </h1>
+            by{' '}
             <a
               href="https://www.latindictionary.io"
               target="_blank"
@@ -183,11 +183,11 @@ function App() {
             </a>
           </div>
           <InformationCircleIcon
-            className="h-6 w-6 cursor-pointer"
+            className="h-6 w-6 mr-1 cursor-pointer"
             onClick={() => setIsInfoModalOpen(true)}
           />
           <ChartBarIcon
-            className="h-6 w-6 cursor-pointer"
+            className="h-6 w-6 mr-1 cursor-pointer"
             onClick={() => setIsStatsModalOpen(true)}
           />
           {theme === "dark" ? (
