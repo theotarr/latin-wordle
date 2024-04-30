@@ -119,7 +119,6 @@ export const WORDS = [
   'baldo',
   'apale',
   'feris',
-  'mexri',
   'cippi',
   'sauli',
   'nebat',
