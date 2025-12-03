@@ -17,8 +17,8 @@ export const getLatinDefinition = (word: string) => {
 }
 
 export const getWordOfDay = () => {
-  // January 1, 2022 Game Epoch
-  const epoch = new Date(2024, 0)
+  // January 1, 2025 Game Epoch
+  const epoch = new Date(2025, 0)
   const start = new Date(epoch)
   const today = new Date()
   today.setHours(0, 0, 0, 0)
