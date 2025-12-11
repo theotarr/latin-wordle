@@ -17,26 +17,38 @@ export const getLatinDefinition = (word: string) => {
 }
 
 export const getWordOfDay = () => {
-  // January 1, 2025 Game Epoch
-  const epoch = new Date(2025, 0)
-  const start = new Date(epoch)
+  // Game epoch (restart point for the daily-word cycle).
+  // Setting this to "today" restarts the cycle so today's word is WORDS[0].
+  const epoch = new Date(2025, 11, 11) // Dec 11, 2025
+
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  let index = 0
-  while (start < today) {
-    index++
-    start.setDate(start.getDate() + 1)
-  }
+  // Use UTC midnights to avoid DST edge cases.
+  const epochUtc = Date.UTC(
+    epoch.getFullYear(),
+    epoch.getMonth(),
+    epoch.getDate()
+  )
+  const todayUtc = Date.UTC(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  )
+  const msPerDay = 24 * 60 * 60 * 1000
+
+  const dayIndex = Math.max(0, Math.floor((todayUtc - epochUtc) / msPerDay))
+  const solutionIndex = dayIndex % WORDS.length
 
   const nextDay = new Date(today)
   nextDay.setDate(today.getDate() + 1)
 
   return {
-    solution: WORDS[index].toUpperCase(),
-    solutionIndex: index,
+    solution: WORDS[solutionIndex].toUpperCase(),
+    solutionIndex,
+    dayIndex,
     tomorrow: nextDay,
   }
 }
 
-export const { solution, solutionIndex, tomorrow } = getWordOfDay()
+export const { solution, solutionIndex, dayIndex, tomorrow } = getWordOfDay()

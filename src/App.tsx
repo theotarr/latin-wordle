@@ -4,167 +4,168 @@ import {
   RefreshIcon,
   SunIcon,
   MoonIcon,
-} from "@heroicons/react/outline";
-import { useState, useEffect, useContext } from "react";
-import { Alert } from "./components/alerts/Alert";
-import { Grid } from "./components/grid/Grid";
-import { Keyboard } from "./components/keyboard/Keyboard";
-import { AboutModal } from "./components/modals/AboutModal";
-import { InfoModal } from "./components/modals/InfoModal";
-import { WinModal } from "./components/modals/WinModal";
-import { SignupModal } from "./components/modals/SignupModal";
-import { StatsModal } from "./components/modals/StatsModal";
-import { ThemeContext } from "./ThemeProvider";
+} from '@heroicons/react/outline'
+import { useState, useEffect, useContext } from 'react'
+import { Alert } from './components/alerts/Alert'
+import { Grid } from './components/grid/Grid'
+import { Keyboard } from './components/keyboard/Keyboard'
+import { AboutModal } from './components/modals/AboutModal'
+import { InfoModal } from './components/modals/InfoModal'
+import { WinModal } from './components/modals/WinModal'
+import { SignupModal } from './components/modals/SignupModal'
+import { StatsModal } from './components/modals/StatsModal'
+import { ThemeContext } from './ThemeProvider'
 import {
   isWordInWordList,
   isWinningWord,
   solution,
+  dayIndex,
   tomorrow,
   getLatinDefinition,
-} from "./lib/words";
-import { addStatsForCompletedGame, loadStats } from "./lib/stats";
+} from './lib/words'
+import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
-} from "./lib/localStorage";
+} from './lib/localStorage'
 
 function App() {
-  const { theme, setTheme } = useContext(ThemeContext);
-  const [currentGuess, setCurrentGuess] = useState("");
-  const [isGameWon, setIsGameWon] = useState(false);
-  const [isGameLost, setIsGameLost] = useState(false);
-  const [isWinModalOpen, setIsWinModalOpen] = useState(false);
-  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
-  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
-  const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false);
-  const [isStatsModalOpen, setIsStatsModalOpen] = useState(false);
-  const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false);
-  const [shareComplete, setShareComplete] = useState(false);
+  const { theme, setTheme } = useContext(ThemeContext)
+  const [currentGuess, setCurrentGuess] = useState('')
+  const [isGameWon, setIsGameWon] = useState(false)
+  const [isGameLost, setIsGameLost] = useState(false)
+  const [isWinModalOpen, setIsWinModalOpen] = useState(false)
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
+  const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
+  const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
+  const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
+  const [shareComplete, setShareComplete] = useState(false)
 
-  let restarted = false;
-  let restartExpires = localStorage.getItem("gameReset");
+  let restarted = false
+  let restartExpires = localStorage.getItem('gameReset')
 
   if (!restartExpires || new Date(restartExpires) < new Date()) {
-    restarted = false;
+    restarted = false
   } else {
-    restarted = true;
+    restarted = true
   }
 
-  let showForm = false;
+  let showForm = false
 
-  if (localStorage.getItem("showForm") == null) {
-    showForm = true;
+  if (localStorage.getItem('showForm') == null) {
+    showForm = true
   } else {
-    showForm = false;
+    showForm = false
   }
 
   const [guesses, setGuesses] = useState<string[]>(() => {
-    const loaded = loadGameStateFromLocalStorage();
-    if (loaded?.solution !== solution) {
-      return [];
+    const loaded = loadGameStateFromLocalStorage()
+    if (loaded?.dayIndex !== dayIndex) {
+      return []
     }
-    const gameWasWon = loaded.guesses.includes(solution);
+    const gameWasWon = loaded.guesses.includes(solution)
     if (gameWasWon) {
-      setIsGameWon(true);
+      setIsGameWon(true)
     }
     if (loaded.guesses.length === 6 && !gameWasWon) {
-      setIsGameLost(true);
+      setIsGameLost(true)
     }
-    return loaded.guesses;
-  });
+    return loaded.guesses
+  })
 
-  const [stats, setStats] = useState(() => loadStats());
+  const [stats, setStats] = useState(() => loadStats())
 
   // Logic to show the signup modal
   useEffect(() => {
-    let pageViews: Number;
+    let pageViews: Number
 
-    if (!localStorage.getItem("pageViews")) {
-      localStorage.setItem("pageViews", "1");
-      return;
+    if (!localStorage.getItem('pageViews')) {
+      localStorage.setItem('pageViews', '1')
+      return
     } else {
-      pageViews = parseInt(localStorage.getItem("pageViews")!) + 1;
-      localStorage.setItem("pageViews", pageViews.toString());
+      pageViews = parseInt(localStorage.getItem('pageViews')!) + 1
+      localStorage.setItem('pageViews', pageViews.toString())
     }
 
-    if (pageViews > 3 && !localStorage.getItem("hasSignedUp")) {
-      setIsSignupModalOpen(true);
-      localStorage.setItem("pageViews", "0");
+    if (pageViews > 3 && !localStorage.getItem('hasSignedUp')) {
+      setIsSignupModalOpen(true)
+      localStorage.setItem('pageViews', '0')
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    saveGameStateToLocalStorage({ guesses, solution });
-  }, [guesses]);
+    saveGameStateToLocalStorage({ guesses, solution, dayIndex })
+  }, [guesses])
 
   useEffect(() => {
     if (isGameWon) {
       // We wait a couple of seconds to allow the "reveal" animations to complete.
-      const timeoutId = setTimeout(() => setIsWinModalOpen(true), 2000);
-      return () => clearTimeout(timeoutId);
+      const timeoutId = setTimeout(() => setIsWinModalOpen(true), 2000)
+      return () => clearTimeout(timeoutId)
     }
-  }, [isGameWon]);
+  }, [isGameWon])
 
   useEffect(() => {
-    localStorage.setItem("showForm", "false");
-  }, [showForm]);
+    localStorage.setItem('showForm', 'false')
+  }, [showForm])
 
   const onChar = (value: string) => {
     if (currentGuess.length < 5 && guesses.length < 6 && !isGameWon) {
-      setCurrentGuess(`${currentGuess}${value}`);
+      setCurrentGuess(`${currentGuess}${value}`)
     }
-  };
+  }
 
   const onDelete = () => {
-    setCurrentGuess(currentGuess.slice(0, -1));
-  };
+    setCurrentGuess(currentGuess.slice(0, -1))
+  }
 
   const onEnter = () => {
     if (!(currentGuess.length === 5) && !isGameLost) {
-      setIsNotEnoughLetters(true);
+      setIsNotEnoughLetters(true)
       return setTimeout(() => {
-        setIsNotEnoughLetters(false);
-      }, 2000);
+        setIsNotEnoughLetters(false)
+      }, 2000)
     }
 
     if (!isWordInWordList(currentGuess)) {
-      setIsWordNotFoundAlertOpen(true);
+      setIsWordNotFoundAlertOpen(true)
       return setTimeout(() => {
-        setIsWordNotFoundAlertOpen(false);
-      }, 2000);
+        setIsWordNotFoundAlertOpen(false)
+      }, 2000)
     }
 
-    const winningWord = isWinningWord(currentGuess);
+    const winningWord = isWinningWord(currentGuess)
 
     if (currentGuess.length === 5 && guesses.length < 6 && !isGameWon) {
-      setGuesses([...guesses, currentGuess]);
-      setCurrentGuess("");
+      setGuesses([...guesses, currentGuess])
+      setCurrentGuess('')
 
       if (winningWord) {
         if (!restarted)
-          setStats(addStatsForCompletedGame(stats, guesses.length));
-        return setIsGameWon(true);
+          setStats(addStatsForCompletedGame(stats, guesses.length))
+        return setIsGameWon(true)
       }
 
       if (guesses.length === 5) {
         if (!restarted)
-          setStats(addStatsForCompletedGame(stats, guesses.length + 1));
-        setIsGameLost(true);
+          setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        setIsGameLost(true)
       }
     }
-  };
+  }
 
   const onReset = () => {
     if (isGameWon || isGameLost) {
-      setGuesses([]);
-      setIsGameLost(false);
-      setIsGameWon(false);
+      setGuesses([])
+      setIsGameLost(false)
+      setIsGameWon(false)
       // set a localstorage item to indicate that the game has been reset so that stats are not counted twice in the same day
-      localStorage.setItem("gameReset", new Date(tomorrow).toString());
-      window.location.reload(); // reload the page to reset the game
+      localStorage.setItem('gameReset', new Date(tomorrow).toString())
+      window.location.reload() // reload the page to reset the game
     }
-  };
+  }
 
   return (
     <div className="text-black dark:text-white bg-white dark:bg-gray-900 transition-all">
@@ -190,16 +191,16 @@ function App() {
             className="h-6 w-6 mr-1 cursor-pointer"
             onClick={() => setIsStatsModalOpen(true)}
           />
-          {theme === "dark" ? (
+          {theme === 'dark' ? (
             <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="text-black dark:text-white shadow-none p-2 focus:outline-none text-lg rounded-full outline-none ring-transparent cursor-pointer"
             >
               <SunIcon className="h-6 w-6 -ml-2" />
             </button>
           ) : (
             <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="text-black dark:text-white focus:outline-none shadow-none p-2 text-lg rounded-full outline-none ring-transparent cursor-pointer"
             >
               <MoonIcon className="h-6 w-6 -ml-2" />
@@ -218,11 +219,11 @@ function App() {
           handleClose={() => setIsWinModalOpen(false)}
           guesses={guesses}
           handleShare={() => {
-            setIsWinModalOpen(false);
-            setShareComplete(true);
+            setIsWinModalOpen(false)
+            setShareComplete(true)
             return setTimeout(() => {
-              setShareComplete(false);
-            }, 2000);
+              setShareComplete(false)
+            }, 2000)
           }}
         />
         <InfoModal
@@ -237,10 +238,10 @@ function App() {
           isGameLost={isGameLost}
           isGameWon={isGameWon}
           handleShare={() => {
-            setShareComplete(true);
+            setShareComplete(true)
             return setTimeout(() => {
-              setShareComplete(false);
-            }, 2000);
+              setShareComplete(false)
+            }, 2000)
           }}
         />
         <AboutModal
@@ -293,7 +294,7 @@ function App() {
         />
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
