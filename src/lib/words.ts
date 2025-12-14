@@ -18,8 +18,8 @@ export const getLatinDefinition = (word: string) => {
 
 export const getWordOfDay = () => {
   // Game epoch (restart point for the daily-word cycle).
-  // Setting this to "today" restarts the cycle so today's word is WORDS[0].
-  const epoch = new Date(2025, 11, 11) // Dec 11, 2025
+  // Dec 14, 2025 is the start of the restarted cycle (dayIndex === 0).
+  const epoch = new Date(2025, 11, 14) // Dec 14, 2025
 
   const today = new Date()
   today.setHours(0, 0, 0, 0)
