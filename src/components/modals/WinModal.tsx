@@ -1,5 +1,4 @@
-import { Dialog } from "@headlessui/react";
-import { CheckIcon } from "@heroicons/react/outline";
+import { CheckIcon } from "@heroicons/react/24/outline";
 import { MiniGrid } from "../mini-grid/MiniGrid";
 import { shareStatus } from "../../lib/share";
 import { BaseModal } from "./BaseModal";
@@ -27,19 +26,16 @@ export const WinModal = ({
           <CheckIcon className="h-6 w-6 text-emerald-600" aria-hidden="true" />
         </div>
         <div className="mt-3 text-center sm:mt-5">
-          <Dialog.Title
-            as="h3"
-            className="text-lg leading-6 font-medium text-gray-900"
-          ></Dialog.Title>
           <div className="mt-2">
             <MiniGrid guesses={guesses} />
           </div>
           <div className="mt-4 dark:text-white">
-            View the definition of {solution} on{" "}
+            View the definition of{" "}
+            <span className="font-semibold">"{solution}"</span> on{" "}
             <a
               href={DefinitionURL}
               target="_blank"
-              rel="noopenner noreferrer"
+              rel="noopener noreferrer"
               className="font-bold"
             >
               latindictionary.io
@@ -51,7 +47,7 @@ export const WinModal = ({
       <div className="mt-5 sm:mt-6">
         <button
           type="button"
-          className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+          className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm"
           onClick={() => {
             shareStatus(guesses, false);
             handleShare();

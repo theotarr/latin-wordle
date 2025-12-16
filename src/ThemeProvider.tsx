@@ -29,7 +29,9 @@ interface Props {
 }
 
 export const ThemeProvider = ({ initialTheme, children }: Props) => {
-  const [theme, setTheme] = useState(getInitialTheme);
+  const [theme, setTheme] = useState(() => {
+    return initialTheme || getInitialTheme();
+  });
 
   const checkTheme = (existing: string) => {
     const root = window.document.documentElement;
@@ -40,10 +42,6 @@ export const ThemeProvider = ({ initialTheme, children }: Props) => {
 
     localStorage.setItem("current-theme", existing);
   };
-
-  if (initialTheme) {
-    checkTheme(initialTheme);
-  }
 
   useEffect(() => {
     checkTheme(theme);

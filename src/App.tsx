@@ -1,12 +1,13 @@
 import {
   InformationCircleIcon,
   ChartBarIcon,
-  RefreshIcon,
+  ArrowPathIcon,
   SunIcon,
   MoonIcon,
-} from "@heroicons/react/outline";
-import { useState, useEffect, useContext } from "react";
+} from "@heroicons/react/24/outline";
+import { useState, useEffect, useContext, useMemo } from "react";
 import { Alert } from "./components/alerts/Alert";
+import { LostAlert } from "./components/alerts/LostAlert";
 import { Grid } from "./components/grid/Grid";
 import { Keyboard } from "./components/keyboard/Keyboard";
 import { AboutModal } from "./components/modals/AboutModal";
@@ -21,7 +22,6 @@ import {
   solution,
   dayIndex,
   tomorrow,
-  getLatinDefinition,
 } from "./lib/words";
 import { addStatsForCompletedGame, loadStats } from "./lib/stats";
 import {
@@ -34,31 +34,23 @@ function App() {
   const [currentGuess, setCurrentGuess] = useState("");
   const [isGameWon, setIsGameWon] = useState(false);
   const [isGameLost, setIsGameLost] = useState(false);
-  const [isWinModalOpen, setIsWinModalOpen] = useState(false);
-  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
-  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
-  const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false);
-  const [isStatsModalOpen, setIsStatsModalOpen] = useState(false);
-  const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false);
-  const [shareComplete, setShareComplete] = useState(false);
+  const [modals, setModals] = useState({
+    win: false,
+    info: false,
+    about: false,
+    signup: false,
+    stats: false,
+  });
+  const [alerts, setAlerts] = useState({
+    notEnoughLetters: false,
+    wordNotFound: false,
+    shareComplete: false,
+  });
 
-  let restarted = false;
-  let restartExpires = localStorage.getItem("gameReset");
-
-  if (!restartExpires || new Date(restartExpires) < new Date()) {
-    restarted = false;
-  } else {
-    restarted = true;
-  }
-
-  let showForm = false;
-
-  if (localStorage.getItem("showForm") == null) {
-    showForm = true;
-  } else {
-    showForm = false;
-  }
+  const restarted = useMemo(() => {
+    const restartExpires = localStorage.getItem("gameReset");
+    return restartExpires && new Date(restartExpires) >= new Date();
+  }, []);
 
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage();
@@ -79,7 +71,7 @@ function App() {
 
   // Logic to show the signup modal
   useEffect(() => {
-    let pageViews: Number;
+    let pageViews: number;
 
     if (!localStorage.getItem("pageViews")) {
       localStorage.setItem("pageViews", "1");
@@ -90,7 +82,7 @@ function App() {
     }
 
     if (pageViews > 3 && !localStorage.getItem("hasSignedUp")) {
-      setIsSignupModalOpen(true);
+      setModals((prev) => ({ ...prev, signup: true }));
       localStorage.setItem("pageViews", "0");
     }
   }, []);
@@ -102,14 +94,12 @@ function App() {
   useEffect(() => {
     if (isGameWon) {
       // We wait a couple of seconds to allow the "reveal" animations to complete.
-      const timeoutId = setTimeout(() => setIsWinModalOpen(true), 2000);
+      const timeoutId = setTimeout(() => {
+        setModals((prev) => ({ ...prev, win: true }));
+      }, 2000);
       return () => clearTimeout(timeoutId);
     }
   }, [isGameWon]);
-
-  useEffect(() => {
-    localStorage.setItem("showForm", "false");
-  }, [showForm]);
 
   const onChar = (value: string) => {
     if (currentGuess.length < 5 && guesses.length < 6 && !isGameWon) {
@@ -123,17 +113,19 @@ function App() {
 
   const onEnter = () => {
     if (!(currentGuess.length === 5) && !isGameLost) {
-      setIsNotEnoughLetters(true);
-      return setTimeout(() => {
-        setIsNotEnoughLetters(false);
+      setAlerts((prev) => ({ ...prev, notEnoughLetters: true }));
+      setTimeout(() => {
+        setAlerts((prev) => ({ ...prev, notEnoughLetters: false }));
       }, 2000);
+      return;
     }
 
     if (!isWordInWordList(currentGuess)) {
-      setIsWordNotFoundAlertOpen(true);
-      return setTimeout(() => {
-        setIsWordNotFoundAlertOpen(false);
+      setAlerts((prev) => ({ ...prev, wordNotFound: true }));
+      setTimeout(() => {
+        setAlerts((prev) => ({ ...prev, wordNotFound: false }));
       }, 2000);
+      return;
     }
 
     const winningWord = isWinningWord(currentGuess);
@@ -145,7 +137,8 @@ function App() {
       if (winningWord) {
         if (!restarted)
           setStats(addStatsForCompletedGame(stats, guesses.length));
-        return setIsGameWon(true);
+        setIsGameWon(true);
+        return;
       }
 
       if (guesses.length === 5) {
@@ -170,26 +163,26 @@ function App() {
   return (
     <div className="text-black dark:text-white bg-white dark:bg-gray-900 transition-all">
       <div className="pt-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div className="flex w-80 mx-auto items-center mb-8">
+        <div className="flex w-full max-w-sm mx-auto items-center mb-8 px-4">
           <div className="ml-2.5 grow">
-            <h1 className="text-xl font-bold">Latin Word Game </h1>
+            <h1 className="text-xl font-semibold">Latin Word Game </h1>
             by{" "}
             <a
               href="https://www.latindictionary.io"
               target="_blank"
-              rel="noopenner noreferrer"
-              className="font-bold"
+              rel="noopener noreferrer"
+              className="font-semibold tracking-tight"
             >
               latindictionary.io
             </a>
           </div>
           <InformationCircleIcon
-            className="h-6 w-6 mr-1 cursor-pointer"
-            onClick={() => setIsInfoModalOpen(true)}
+            className="h-6 w-6 mr-1 cursor-pointer hover:opacity-70 transition-opacity"
+            onClick={() => setModals((prev) => ({ ...prev, info: true }))}
           />
           <ChartBarIcon
-            className="h-6 w-6 mr-1 cursor-pointer"
-            onClick={() => setIsStatsModalOpen(true)}
+            className="h-6 w-6 mr-1 cursor-pointer hover:opacity-70 transition-opacity"
+            onClick={() => setModals((prev) => ({ ...prev, stats: true }))}
           />
           {theme === "dark" ? (
             <button
@@ -207,7 +200,12 @@ function App() {
             </button>
           )}
         </div>
-        <Grid guesses={guesses} currentGuess={currentGuess} />
+        <Grid
+          guesses={guesses}
+          currentGuess={currentGuess}
+          isGameWon={isGameWon}
+          shouldShake={alerts.wordNotFound || alerts.notEnoughLetters}
+        />
         <Keyboard
           onChar={onChar}
           onDelete={onDelete}
@@ -215,49 +213,49 @@ function App() {
           guesses={guesses}
         />
         <WinModal
-          isOpen={isWinModalOpen}
-          handleClose={() => setIsWinModalOpen(false)}
+          isOpen={modals.win}
+          handleClose={() => setModals((prev) => ({ ...prev, win: false }))}
           guesses={guesses}
           handleShare={() => {
-            setIsWinModalOpen(false);
-            setShareComplete(true);
-            return setTimeout(() => {
-              setShareComplete(false);
+            setModals((prev) => ({ ...prev, win: false }));
+            setAlerts((prev) => ({ ...prev, shareComplete: true }));
+            setTimeout(() => {
+              setAlerts((prev) => ({ ...prev, shareComplete: false }));
             }, 2000);
           }}
         />
         <InfoModal
-          isOpen={isInfoModalOpen}
-          handleClose={() => setIsInfoModalOpen(false)}
+          isOpen={modals.info}
+          handleClose={() => setModals((prev) => ({ ...prev, info: false }))}
         />
         <StatsModal
-          isOpen={isStatsModalOpen}
-          handleClose={() => setIsStatsModalOpen(false)}
+          isOpen={modals.stats}
+          handleClose={() => setModals((prev) => ({ ...prev, stats: false }))}
           gameStats={stats}
           guesses={guesses}
           isGameLost={isGameLost}
           isGameWon={isGameWon}
           handleShare={() => {
-            setShareComplete(true);
-            return setTimeout(() => {
-              setShareComplete(false);
+            setAlerts((prev) => ({ ...prev, shareComplete: true }));
+            setTimeout(() => {
+              setAlerts((prev) => ({ ...prev, shareComplete: false }));
             }, 2000);
           }}
         />
         <AboutModal
-          isOpen={isAboutModalOpen}
-          handleClose={() => setIsAboutModalOpen(false)}
+          isOpen={modals.about}
+          handleClose={() => setModals((prev) => ({ ...prev, about: false }))}
         />
         <SignupModal
-          isOpen={isSignupModalOpen}
-          handleClose={() => setIsSignupModalOpen(false)}
+          isOpen={modals.signup}
+          handleClose={() => setModals((prev) => ({ ...prev, signup: false }))}
         />
 
         <div className="flex justify-center gap-3 mt-8">
           <button
             type="button"
-            className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"
-            onClick={() => setIsAboutModalOpen(true)}
+            className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 select-none"
+            onClick={() => setModals((prev) => ({ ...prev, about: true }))}
           >
             About
             <InformationCircleIcon className="h-4 w-4 ml-1.5" />
@@ -269,27 +267,17 @@ function App() {
             onClick={onReset}
           >
             Restart
-            <RefreshIcon className="ml-1.5 h-4 w-4" />
+            <ArrowPathIcon className="ml-1.5 h-4 w-4" />
           </button>
           {/* </Tooltip> */}
         </div>
 
-        <Alert message="Not enough letters" isOpen={isNotEnoughLetters} />
-        <Alert message="Word not found" isOpen={isWordNotFoundAlertOpen} />
-        <Alert
-          message={`
-              <a
-                href=${getLatinDefinition(solution)}
-                target="_blank"
-                rel="noopenner noreferrer"
-              >
-                You lost. The correct word was ${solution}. Click here to see the definition of ${solution} on latindictionary.io.
-              </a>`}
-          isOpen={isGameLost}
-        />
+        <Alert message="Not enough letters" isOpen={alerts.notEnoughLetters} />
+        <Alert message="Word not found" isOpen={alerts.wordNotFound} />
+        <LostAlert isOpen={isGameLost} solution={solution} />
         <Alert
           message="Game copied to clipboard"
-          isOpen={shareComplete}
+          isOpen={alerts.shareComplete}
           variant="success"
         />
       </div>

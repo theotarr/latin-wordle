@@ -33,7 +33,7 @@ export const Alert = ({ isOpen, message, variant = "warning" }: Props) => {
         <div className="p-4">
           <p
             dangerouslySetInnerHTML={{ __html: message }}
-            className="text-sm text-center font-medium text-gray-900"
+            className="text-sm text-center font-medium text-gray-900 dark:text-gray-800"
           ></p>
         </div>
       </div>
