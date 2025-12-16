@@ -6,6 +6,7 @@ import {
   MoonIcon,
 } from '@heroicons/react/outline'
 import { useState, useEffect, useContext } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { Alert } from './components/alerts/Alert'
 import { Grid } from './components/grid/Grid'
 import { Keyboard } from './components/keyboard/Keyboard'
@@ -169,6 +170,7 @@ function App() {
 
   return (
     <div className="text-black dark:text-white bg-white dark:bg-gray-900 transition-all">
+      <Analytics />
       <div className="pt-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="flex w-80 mx-auto items-center mb-8">
           <div className="ml-2.5 grow">
