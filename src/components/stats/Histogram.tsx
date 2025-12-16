@@ -1,12 +1,12 @@
-import { GameStats } from '../../lib/localStorage'
-import { Progress } from './Progress'
+import { GameStats } from "../../lib/localStorage";
+import { Progress } from "./Progress";
 
 type Props = {
-  gameStats: GameStats
-}
+  gameStats: GameStats;
+};
 
 export const Histogram = ({ gameStats }: Props) => {
-  const { totalGames, winDistribution } = gameStats
+  const { totalGames, winDistribution } = gameStats;
 
   return (
     <div className="columns-1 justify-left m-2 text-sm dark:text-gray-300">
@@ -19,5 +19,5 @@ export const Histogram = ({ gameStats }: Props) => {
         />
       ))}
     </div>
-  )
-}
+  );
+};

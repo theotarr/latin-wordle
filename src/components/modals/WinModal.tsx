@@ -1,18 +1,18 @@
-import { Dialog } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/outline'
-import { MiniGrid } from '../mini-grid/MiniGrid'
-import { shareStatus } from '../../lib/share'
-import { BaseModal } from './BaseModal'
-import { solution } from '../../lib/words'
+import { Dialog } from "@headlessui/react";
+import { CheckIcon } from "@heroicons/react/outline";
+import { MiniGrid } from "../mini-grid/MiniGrid";
+import { shareStatus } from "../../lib/share";
+import { BaseModal } from "./BaseModal";
+import { solution } from "../../lib/words";
 
 type Props = {
-  isOpen: boolean
-  handleClose: () => void
-  guesses: string[]
-  handleShare: () => void
-}
+  isOpen: boolean;
+  handleClose: () => void;
+  guesses: string[];
+  handleShare: () => void;
+};
 
-const DefinitionURL = `https://www.latindictionary.io/dictionary?q=${solution}`
+const DefinitionURL = `https://www.latindictionary.io/dictionary?q=${solution}`;
 
 export const WinModal = ({
   isOpen,
@@ -35,7 +35,7 @@ export const WinModal = ({
             <MiniGrid guesses={guesses} />
           </div>
           <div className="mt-4 dark:text-white">
-            View the definition of {solution} on{' '}
+            View the definition of {solution} on{" "}
             <a
               href={DefinitionURL}
               target="_blank"
@@ -53,13 +53,13 @@ export const WinModal = ({
           type="button"
           className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
           onClick={() => {
-            shareStatus(guesses, false)
-            handleShare()
+            shareStatus(guesses, false);
+            handleShare();
           }}
         >
           Share
         </button>
       </div>
     </BaseModal>
-  )
-}
+  );
+};

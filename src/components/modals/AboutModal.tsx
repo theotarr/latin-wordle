@@ -1,9 +1,9 @@
-import { BaseModal } from './BaseModal'
+import { BaseModal } from "./BaseModal";
 
 type Props = {
-  isOpen: boolean
-  handleClose: () => void
-}
+  isOpen: boolean;
+  handleClose: () => void;
+};
 
 export const AboutModal = ({ isOpen, handleClose }: Props) => {
   return (
@@ -24,7 +24,7 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
         Support Us
       </h4>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        If you find this useful, please sign up on{' '}
+        If you find this useful, please sign up on{" "}
         <a
           href="https://www.latindictionary.io/"
           target="_blank"
@@ -32,14 +32,14 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
           className="font-bold underline"
         >
           latindictionary.io
-        </a>{' '}
+        </a>{" "}
         and share it with your friends!
       </p>
       <h4 className="text-lg leading-6 font-medium text-gray-900 dark:text-white mt-6">
         Report a Problem
       </h4>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        If you find a problem, please contact{' '}
+        If you find a problem, please contact{" "}
         <a
           href="mailto:support@latindictionary.io"
           target="_blank"
@@ -50,5 +50,5 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
         </a>
       </p>
     </BaseModal>
-  )
-}
+  );
+};

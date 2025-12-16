@@ -1,8 +1,8 @@
 type Props = {
-  index: number
-  size: number
-  label: string
-}
+  index: number;
+  size: number;
+  label: string;
+};
 
 export const Progress = ({ index, size, label }: Props) => {
   return (
@@ -17,5 +17,5 @@ export const Progress = ({ index, size, label }: Props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

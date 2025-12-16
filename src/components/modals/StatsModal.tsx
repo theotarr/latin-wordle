@@ -1,26 +1,26 @@
-import Countdown from 'react-countdown'
-import { StatBar } from '../stats/StatBar'
-import { Histogram } from '../stats/Histogram'
-import { GameStats } from '../../lib/localStorage'
-import { shareStatus } from '../../lib/share'
-import { tomorrow } from '../../lib/words'
-import { BaseModal } from './BaseModal'
+import Countdown from "react-countdown";
+import { StatBar } from "../stats/StatBar";
+import { Histogram } from "../stats/Histogram";
+import { GameStats } from "../../lib/localStorage";
+import { shareStatus } from "../../lib/share";
+import { tomorrow } from "../../lib/words";
+import { BaseModal } from "./BaseModal";
 import {
   STATISTICS_TITLE,
   GUESS_DISTRIBUTION_TEXT,
   NEW_WORD_TEXT,
   SHARE_TEXT,
-} from '../../constants/strings'
+} from "../../constants/strings";
 
 type Props = {
-  isOpen: boolean
-  handleClose: () => void
-  guesses: string[]
-  gameStats: GameStats
-  isGameLost: boolean
-  isGameWon: boolean
-  handleShare: () => void
-}
+  isOpen: boolean;
+  handleClose: () => void;
+  guesses: string[];
+  gameStats: GameStats;
+  isGameLost: boolean;
+  isGameWon: boolean;
+  handleShare: () => void;
+};
 
 export const StatsModal = ({
   isOpen,
@@ -40,7 +40,7 @@ export const StatsModal = ({
       >
         <StatBar gameStats={gameStats} />
       </BaseModal>
-    )
+    );
   }
   return (
     <BaseModal
@@ -67,8 +67,8 @@ export const StatsModal = ({
             type="button"
             className="mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
             onClick={() => {
-              shareStatus(guesses, isGameLost)
-              handleShare()
+              shareStatus(guesses, isGameLost);
+              handleShare();
             }}
           >
             {SHARE_TEXT}
@@ -76,5 +76,5 @@ export const StatsModal = ({
         </div>
       )}
     </BaseModal>
-  )
-}
+  );
+};

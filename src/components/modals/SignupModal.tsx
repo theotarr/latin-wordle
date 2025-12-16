@@ -1,16 +1,16 @@
-import { UserAddIcon } from '@heroicons/react/outline'
-import { BaseModal } from './BaseModal'
+import { UserAddIcon } from "@heroicons/react/outline";
+import { BaseModal } from "./BaseModal";
 
 type Props = {
-  isOpen: boolean
-  handleClose: () => void
-}
+  isOpen: boolean;
+  handleClose: () => void;
+};
 
 export const SignupModal = ({ isOpen, handleClose }: Props) => {
   // set a new property in localStorage to indicate that the user has signed up
   const onClick = () => {
-    localStorage.setItem('hasSignedUp', 'true')
-  }
+    localStorage.setItem("hasSignedUp", "true");
+  };
 
   return (
     <BaseModal title="Sign Up" isOpen={isOpen} handleClose={handleClose}>
@@ -19,8 +19,8 @@ export const SignupModal = ({ isOpen, handleClose }: Props) => {
           <UserAddIcon className="h-5 w-5 text-blue-600" aria-hidden="true" />
         </div>
         <p className="dark:text-white">
-          If you are enjoying playing Latin Word Game, please consider signing up
-          to get access extra features, such as multi-word lookups and
+          If you are enjoying playing Latin Word Game, please consider signing
+          up to get access extra features, such as multi-word lookups and
           personalized word lists. It is completely <b>free</b>, and helps us to
           continue improving our games and services.
         </p>
@@ -41,5 +41,5 @@ export const SignupModal = ({ isOpen, handleClose }: Props) => {
         </div>
       </div>
     </BaseModal>
-  )
-}
+  );
+};

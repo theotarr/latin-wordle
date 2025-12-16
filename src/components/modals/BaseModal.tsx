@@ -1,13 +1,13 @@
-import { Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XCircleIcon } from '@heroicons/react/outline'
+import { Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { XCircleIcon } from "@heroicons/react/outline";
 
 type Props = {
-  title: string
-  children: React.ReactNode
-  isOpen: boolean
-  handleClose: () => void
-}
+  title: string;
+  children: React.ReactNode;
+  isOpen: boolean;
+  handleClose: () => void;
+};
 
 export const BaseModal = ({ title, children, isOpen, handleClose }: Props) => {
   return (
@@ -69,5 +69,5 @@ export const BaseModal = ({ title, children, isOpen, handleClose }: Props) => {
         </div>
       </Dialog>
     </Transition.Root>
-  )
-}
+  );
+};

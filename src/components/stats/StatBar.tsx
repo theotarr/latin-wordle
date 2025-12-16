@@ -1,23 +1,23 @@
-import { GameStats } from '../../lib/localStorage'
+import { GameStats } from "../../lib/localStorage";
 
 type Props = {
-  gameStats: GameStats
-}
+  gameStats: GameStats;
+};
 
 const StatItem = ({
   label,
   value,
 }: {
-  label: string
-  value: string | number
+  label: string;
+  value: string | number;
 }) => {
   return (
     <div className="items-center justify-center m-1 w-1/4 dark:text-gray-100">
       <div className="text-3xl font-bold">{value}</div>
       <div className="text-xs">{label}</div>
     </div>
-  )
-}
+  );
+};
 
 export const StatBar = ({ gameStats }: Props) => {
   return (
@@ -27,5 +27,5 @@ export const StatBar = ({ gameStats }: Props) => {
       <StatItem label="Current streak" value={gameStats.currentStreak} />
       <StatItem label="Best streak" value={gameStats.bestStreak} />
     </div>
-  )
-}
+  );
+};

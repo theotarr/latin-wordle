@@ -1,22 +1,22 @@
-import { Fragment } from 'react'
-import { Transition } from '@headlessui/react'
-import classNames from 'classnames'
+import { Fragment } from "react";
+import { Transition } from "@headlessui/react";
+import classNames from "classnames";
 
 type Props = {
-  isOpen: boolean
-  message: string
-  variant?: 'success' | 'warning' | 'info'
-}
+  isOpen: boolean;
+  message: string;
+  variant?: "success" | "warning" | "info";
+};
 
-export const Alert = ({ isOpen, message, variant = 'warning' }: Props) => {
+export const Alert = ({ isOpen, message, variant = "warning" }: Props) => {
   const classes = classNames(
-    'fixed top-20 left-1/2 transform -translate-x-1/2 max-w-sm w-full shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden',
+    "fixed top-20 left-1/2 transform -translate-x-1/2 max-w-sm w-full shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden",
     {
-      'bg-rose-200': variant === 'warning',
-      'bg-emerald-200': variant === 'success',
-      'bg-blue-200': variant === 'info',
+      "bg-rose-200": variant === "warning",
+      "bg-emerald-200": variant === "success",
+      "bg-blue-200": variant === "info",
     }
-  )
+  );
 
   return (
     <Transition
@@ -38,5 +38,5 @@ export const Alert = ({ isOpen, message, variant = 'warning' }: Props) => {
         </div>
       </div>
     </Transition>
-  )
-}
+  );
+};
