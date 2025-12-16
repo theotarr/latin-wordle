@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ReactGA from "react-ga";
 import { ThemeProvider } from "./ThemeProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 ReactGA.initialize("UA-215919527-1"); // intialize Google Analytics to track site usage
 ReactGA.pageview(window.location.pathname); // track page view
@@ -13,6 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider>
       <App />
+      <Analytics />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
