@@ -1,5 +1,10 @@
 import { Fragment } from "react";
-import { Dialog, DialogPanel, DialogTitle, Transition } from "@headlessui/react";
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Transition,
+} from "@headlessui/react";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 
 type Props = {
@@ -22,9 +27,12 @@ export const BaseModal = ({ title, children, isOpen, handleClose }: Props) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500/75 dark:bg-gray-900/75" aria-hidden="true" />
+          <div
+            className="fixed inset-0 bg-gray-500/75 dark:bg-gray-900/75"
+            aria-hidden="true"
+          />
         </Transition.Child>
-        
+
         <div className="fixed inset-0 flex items-center justify-center p-4">
           <Transition.Child
             as={Fragment}

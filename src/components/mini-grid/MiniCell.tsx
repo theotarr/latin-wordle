@@ -12,7 +12,7 @@ export const MiniCell = ({ status }: Props) => {
       "bg-white": status === "absent",
       "bg-emerald-500": status === "correct",
       "bg-sky-500": status === "present",
-    }
+    },
   );
 
   return (

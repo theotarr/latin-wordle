@@ -21,5 +21,5 @@ root.render(
       <App />
       <Analytics />
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

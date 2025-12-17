@@ -11,7 +11,11 @@ export const CompletedRow = ({ guess, bounce }: Props) => {
   const statuses = getGuessStatuses(guess);
 
   return (
-    <div className={classnames("flex justify-center mb-1", { "bounce-animation": bounce })}>
+    <div
+      className={classnames("flex justify-center mb-1", {
+        "bounce-animation": bounce,
+      })}
+    >
       {guess.split("").map((letter, i) => (
         <Cell key={i} value={letter} status={statuses[i]} cellIndex={i} />
       ))}

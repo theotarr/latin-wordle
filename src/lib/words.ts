@@ -28,12 +28,12 @@ export const getWordOfDay = () => {
   const epochUtc = Date.UTC(
     epoch.getFullYear(),
     epoch.getMonth(),
-    epoch.getDate()
+    epoch.getDate(),
   );
   const todayUtc = Date.UTC(
     today.getFullYear(),
     today.getMonth(),
-    today.getDate()
+    today.getDate(),
   );
   const msPerDay = 24 * 60 * 60 * 1000;
 

@@ -8,7 +8,7 @@ import {
 
 export const addStatsForCompletedGame = (
   gameStats: GameStats,
-  count: number
+  count: number,
 ) => {
   // Count is number of incorrect guesses before end.
   const stats = { ...gameStats };
@@ -51,6 +51,6 @@ const getSuccessRate = (gameStats: GameStats) => {
   const { totalGames, gamesFailed } = gameStats;
 
   return Math.round(
-    (100 * (totalGames - gamesFailed)) / Math.max(totalGames, 1)
+    (100 * (totalGames - gamesFailed)) / Math.max(totalGames, 1),
   );
 };

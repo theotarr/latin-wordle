@@ -11,7 +11,11 @@ export const CurrentRow = ({ guess, shake }: Props) => {
   const emptyCells = Array.from(Array(5 - splitGuess.length));
 
   return (
-    <div className={classnames("flex justify-center mb-1", { "shake-animation": shake })}>
+    <div
+      className={classnames("flex justify-center mb-1", {
+        "shake-animation": shake,
+      })}
+    >
       {splitGuess.map((letter, i) => (
         <Cell key={i} value={letter} />
       ))}

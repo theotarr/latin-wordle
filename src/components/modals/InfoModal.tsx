@@ -24,7 +24,8 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
         <Cell value="S" />
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        The letter C is in the word <span className="font-latin">CANIS</span> and in the correct spot.
+        The letter C is in the word <span className="font-latin">CANIS</span>{" "}
+        and in the correct spot.
       </p>
 
       <div className="flex justify-center mb-1 mt-4">
@@ -35,7 +36,8 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
         <Cell value="E" />
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        The letter R is in the word <span className="font-latin">AMARE</span> but in the wrong spot.
+        The letter R is in the word <span className="font-latin">AMARE</span>{" "}
+        but in the wrong spot.
       </p>
 
       <div className="flex justify-center mb-1 mt-4">
@@ -46,7 +48,8 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
         <Cell value="O" />
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        The letter U is not in the word <span className="font-latin">PUERO</span> in any spot.
+        The letter U is not in the word{" "}
+        <span className="font-latin">PUERO</span> in any spot.
       </p>
     </BaseModal>
   );

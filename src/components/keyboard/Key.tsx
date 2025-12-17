@@ -28,7 +28,7 @@ export const Key = ({
         status === "correct",
       "bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white":
         status === "present",
-    }
+    },
   );
 
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {

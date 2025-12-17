@@ -34,7 +34,8 @@ export const LostAlert = ({ isOpen, solution }: Props) => {
             >
               Click here
             </a>{" "}
-            to see the definition of <span className="font-latin">{solution}</span> on{" "}
+            to see the definition of{" "}
+            <span className="font-latin">{solution}</span> on{" "}
             <a
               href="https://www.latindictionary.io"
               target="_blank"
@@ -50,4 +51,3 @@ export const LostAlert = ({ isOpen, solution }: Props) => {
     </Transition>
   );
 };
-
