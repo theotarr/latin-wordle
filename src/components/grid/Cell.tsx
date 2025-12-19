@@ -23,7 +23,7 @@ export const Cell = ({ value, status, cellIndex }: Props) => {
     cellIndex !== undefined ? `cell-${cellIndex}` : "cell-noindex";
 
   const classes = classnames(
-    "w-14 h-14 border-solid border-2 flex items-center justify-center mx-0.5 text-lg font-bold rounded",
+    "w-14 h-14 border-solid border-2 flex items-center justify-center mx-0.5 text-2xl font-semibold rounded",
     cellIndexClass,
     {
       "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-600":
@@ -39,7 +39,7 @@ export const Cell = ({ value, status, cellIndex }: Props) => {
       "cell-animation": !!value,
       "revealing-status1": revealPhase === 1,
       "revealing-status2": revealPhase === 2,
-    },
+    }
   );
 
   return (
