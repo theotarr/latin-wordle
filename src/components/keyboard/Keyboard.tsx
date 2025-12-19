@@ -68,8 +68,8 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
         <Key value="L" onClick={onClick} status={charStatuses["L"]} />
       </div>
       <div className="flex justify-center">
-        <Key width={65.4} value="ENTER" onClick={onClick}>
-          Enter
+        <Key width={65.4} className="text-sm" value="ENTER" onClick={onClick}>
+          ENTER
         </Key>
         <Key value="Z" onClick={onClick} status={charStatuses["Z"]} />
         <Key value="X" onClick={onClick} status={charStatuses["X"]} />
@@ -79,7 +79,22 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
         <Key value="N" onClick={onClick} status={charStatuses["N"]} />
         <Key value="M" onClick={onClick} status={charStatuses["M"]} />
         <Key width={65.4} value="DELETE" onClick={onClick}>
-          Delete
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            className="w-6 h-6"
+          >
+            <path d="M10 5a2 2 0 0 0-1.344.519l-6.328 5.74a1 1 0 0 0 0 1.481l6.328 5.741A2 2 0 0 0 10 19h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z" />
+            <path d="m12 9 6 6" />
+            <path d="m18 9-6 6" />
+          </svg>
         </Key>
       </div>
     </div>

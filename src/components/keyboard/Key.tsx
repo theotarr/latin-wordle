@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import classnames from "classnames";
+import clsx from "classnames";
 import { KeyValue } from "../../lib/keyboard";
 import { CharStatus } from "../../lib/statuses";
 
@@ -8,6 +8,7 @@ type Props = {
   value: KeyValue;
   width?: number;
   status?: CharStatus;
+  className?: string;
   onClick: (value: KeyValue) => void;
 };
 
@@ -16,10 +17,11 @@ export const Key = ({
   status,
   width = 40,
   value,
+  className,
   onClick,
 }: Props) => {
-  const classes = classnames(
-    "flex items-center justify-center rounded mx-0.5 text-xs font-bold cursor-pointer select-none",
+  const classes = clsx(
+    "flex items-center justify-center rounded mx-0.5 text-lg font-semibold cursor-pointer select-none",
     {
       "bg-slate-200 dark:bg-slate-600 hover:bg-slate-300 active:bg-slate-400":
         !status,
@@ -29,6 +31,7 @@ export const Key = ({
       "bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white":
         status === "present",
     },
+    className,
   );
 
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
