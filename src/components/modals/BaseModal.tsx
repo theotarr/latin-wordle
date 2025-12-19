@@ -4,8 +4,9 @@ import {
   DialogPanel,
   DialogTitle,
   Transition,
+  TransitionChild,
 } from "@headlessui/react";
-import { XCircleIcon } from "@heroicons/react/24/outline";
+import { XCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 type Props = {
   title: string;
@@ -18,7 +19,7 @@ export const BaseModal = ({ title, children, isOpen, handleClose }: Props) => {
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog onClose={handleClose} className="relative z-10">
-        <Transition.Child
+        <TransitionChild
           as={Fragment}
           enter="ease-out duration-300 transition-opacity"
           enterFrom="opacity-0"
@@ -31,10 +32,10 @@ export const BaseModal = ({ title, children, isOpen, handleClose }: Props) => {
             className="fixed inset-0 bg-gray-500/75 dark:bg-gray-900/75"
             aria-hidden="true"
           />
-        </Transition.Child>
+        </TransitionChild>
 
         <div className="fixed inset-0 flex items-center justify-center p-4">
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300 transition-all"
             enterFrom="opacity-0 scale-95"
@@ -43,14 +44,14 @@ export const BaseModal = ({ title, children, isOpen, handleClose }: Props) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <DialogPanel className="mx-auto max-w-sm rounded-lg bg-white dark:bg-gray-800 px-4 pt-5 pb-4 shadow-xl relative transform">
+            <DialogPanel className="mx-auto max-w-sm rounded-xl bg-white dark:bg-gray-800 p-8 shadow-xl relative">
               <div className="absolute right-4 top-4">
                 <button
                   type="button"
                   onClick={handleClose}
                   className="text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200"
                 >
-                  <XCircleIcon className="h-6 w-6" aria-hidden="true" />
+                  <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                 </button>
               </div>
               <div className="text-center">
@@ -60,7 +61,7 @@ export const BaseModal = ({ title, children, isOpen, handleClose }: Props) => {
                 <div className="mt-2">{children}</div>
               </div>
             </DialogPanel>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
     </Transition>

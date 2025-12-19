@@ -21,7 +21,7 @@ export const LostAlert = ({ isOpen, solution }: Props) => {
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className="fixed top-20 left-1/2 transform -translate-x-1/2 max-w-sm w-full shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden bg-rose-200">
+      <div className="fixed top-20 left-1/2 transform -translate-x-1/2 max-w-sm w-full shadow-lg rounded-xl pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden bg-rose-200">
         <div className="p-4">
           <p className="text-sm text-center font-medium text-gray-900">
             You lost. The correct word was{" "}
