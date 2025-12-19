@@ -74,6 +74,6 @@ Clone the repository and perform the following command line actions:
 
 ```bash
 $ cd latin-wordle
-$ npm install
-$ npm run start
+$ pnpm install
+$ pnpm dev
 ```
