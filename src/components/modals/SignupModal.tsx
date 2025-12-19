@@ -15,8 +15,8 @@ export const SignupModal = ({ isOpen, handleClose }: Props) => {
   return (
     <BaseModal title="Sign Up" isOpen={isOpen} handleClose={handleClose}>
       <div>
-        <div className="mx-auto my-4 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100">
-          <UserPlusIcon className="h-5 w-5 text-blue-600" aria-hidden="true" />
+        <div className="mx-auto my-4 flex items-center justify-center h-12 w-12 rounded-full bg-sky-100">
+          <UserPlusIcon className="h-5 w-5 text-sky-600" aria-hidden="true" />
         </div>
         <p className="dark:text-white">
           If you are enjoying playing Latin Word Game, please consider signing
@@ -33,7 +33,7 @@ export const SignupModal = ({ isOpen, handleClose }: Props) => {
             <button
               type="button"
               onClick={onClick}
-              className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm"
+              className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-600 text-base font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 sm:text-sm"
             >
               Sign Up
             </button>

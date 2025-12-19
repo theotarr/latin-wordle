@@ -176,29 +176,28 @@ function App() {
               latindictionary.io
             </a>
           </div>
-          <InformationCircleIcon
-            className="h-6 w-6 mr-1 cursor-pointer hover:opacity-70 transition-opacity"
-            onClick={() => setModals((prev) => ({ ...prev, info: true }))}
-          />
-          <ChartBarIcon
-            className="h-6 w-6 mr-1 cursor-pointer hover:opacity-70 transition-opacity"
-            onClick={() => setModals((prev) => ({ ...prev, stats: true }))}
-          />
-          {theme === "dark" ? (
+          <div className="flex items-center gap-1">
+            <InformationCircleIcon
+              className="h-6 w-6 cursor-pointer hover:opacity-70 transition-opacity"
+              onClick={() => setModals((prev) => ({ ...prev, info: true }))}
+              strokeWidth={2}
+            />
+            <ChartBarIcon
+              className="h-6 w-6 cursor-pointer hover:opacity-70 transition-opacity"
+              onClick={() => setModals((prev) => ({ ...prev, stats: true }))}
+              strokeWidth={2}
+            />
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="text-black dark:text-white shadow-none p-2 focus:outline-none text-lg rounded-full outline-none ring-transparent cursor-pointer"
+              className="h-6 w-6 cursor-pointer hover:opacity-70 transition-opacity"
             >
-              <SunIcon className="h-6 w-6 -ml-2" />
+              {theme === "dark" ? (
+                <SunIcon className="h-6 w-6" strokeWidth={2} />
+              ) : (
+                <MoonIcon className="h-6 w-6" strokeWidth={2} />
+              )}
             </button>
-          ) : (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="text-black dark:text-white focus:outline-none shadow-none p-2 text-lg rounded-full outline-none ring-transparent cursor-pointer"
-            >
-              <MoonIcon className="h-6 w-6 -ml-2" />
-            </button>
-          )}
+          </div>
         </div>
         <Grid
           guesses={guesses}
@@ -254,22 +253,18 @@ function App() {
         <div className="flex justify-center gap-3 mt-8">
           <button
             type="button"
-            className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 select-none"
+            className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-sky-700 bg-sky-100 hover:bg-sky-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 select-none"
             onClick={() => setModals((prev) => ({ ...prev, about: true }))}
           >
             About
-            <InformationCircleIcon className="h-4 w-4 ml-1.5" />
           </button>
-          {/* <Tooltip tooltipText="Restart after winning or losing"> */}
           <button
             type="button"
             className="flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 select-none"
             onClick={onReset}
           >
             Restart
-            <ArrowPathIcon className="ml-1.5 h-4 w-4" />
           </button>
-          {/* </Tooltip> */}
         </div>
 
         <Alert message="Not enough letters" isOpen={alerts.notEnoughLetters} />
