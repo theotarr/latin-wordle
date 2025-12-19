@@ -83,19 +83,21 @@ body > #root > div {
 }
 
 .revealing-status1 {
-  animation: revealCharStatus1 ease-in;
-  animation-duration: 0.25s;
-  animation-delay: calc(0.25s * var(--cell-index));
+  animation: revealCharStatus1 cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: 0.3s;
+  animation-delay: calc(0.15s * var(--cell-index));
+  animation-fill-mode: forwards;
 }
 
 .revealing-status2 {
-  animation: revealCharStatus2 ease-in;
-  animation-duration: 0.25s;
+  animation: revealCharStatus2 cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes revealCharStatus1 {
   from {
-    transform: none;
+    transform: rotateX(0deg);
   }
 
   to {
@@ -109,7 +111,7 @@ body > #root > div {
   }
 
   to {
-    transform: none;
+    transform: rotateX(0deg);
   }
 }
 
