@@ -4,6 +4,7 @@ import {
   ArrowPathIcon,
   SunIcon,
   MoonIcon,
+  Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 import { useState, useEffect, useContext, useMemo } from "react";
 import { Alert } from "./components/alerts/Alert";
@@ -15,6 +16,7 @@ import { InfoModal } from "./components/modals/InfoModal";
 import { WinModal } from "./components/modals/WinModal";
 import { SignupModal } from "./components/modals/SignupModal";
 import { StatsModal } from "./components/modals/StatsModal";
+import { DonationModal } from "./components/modals/DonationModal";
 import { ThemeContext } from "./ThemeProvider";
 import {
   isWordInWordList,
@@ -177,6 +179,15 @@ function App() {
             </a>
           </div>
           <div className="flex items-center gap-1">
+            {/* <a
+              href="https://connections.latindictionary.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="h-6 w-6 cursor-pointer hover:opacity-70 transition-opacity"
+              aria-label="Go to Connections"
+            >
+              <Squares2X2Icon className="h-6 w-6" strokeWidth={2} />
+            </a> */}
             <InformationCircleIcon
               className="h-6 w-6 cursor-pointer hover:opacity-70 transition-opacity"
               onClick={() => setModals((prev) => ({ ...prev, info: true }))}
@@ -249,7 +260,7 @@ function App() {
           isOpen={modals.signup}
           handleClose={() => setModals((prev) => ({ ...prev, signup: false }))}
         />
-
+        <DonationModal />
         <div className="flex justify-center gap-3 mt-8">
           <button
             type="button"
