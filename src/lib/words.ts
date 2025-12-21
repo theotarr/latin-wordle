@@ -13,7 +13,7 @@ export const isWinningWord = (word: string) => {
 };
 
 export const getLatinDefinition = (word: string) => {
-  return `https://www.latindictionary.io/dictionary?q=${word}`;
+  return `https://www.latindictionary.io/dictionary?q=${word}&lang=latin`;
 };
 
 export const getWordOfDay = () => {

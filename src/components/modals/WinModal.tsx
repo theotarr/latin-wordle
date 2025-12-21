@@ -11,7 +11,7 @@ type Props = {
   handleShare: () => void;
 };
 
-const DefinitionURL = `https://www.latindictionary.io/dictionary?q=${solution}`;
+const DefinitionURL = `https://www.latindictionary.io/dictionary?q=${solution}&lang=latin`;
 
 export const WinModal = ({
   isOpen,
