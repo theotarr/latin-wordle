@@ -45,15 +45,19 @@ export const DonationModal = () => {
             <b>latindictionary.io</b> online.
           </p>
           <p className="mb-3">
-            We&apos;re a small project dedicated to keeping Latin resources free
-            and accessible to everyone. Over 99% of our users don&apos;t
-            contribute, but if only 1% of our users donated $1, we would be
-            able to cover our expenses and eventually go <b>ad-free</b>.
+            I started latindictionary.io when I was 14 — a freshman in high
+            school — inspired by my mom (a Latin teacher) and encouraged by my
+            dad (a software engineer). I taught myself to code so I could build
+            this site and the Latin games on it, because I wanted to share the
+            joy of learning Latin with others.
           </p>
           <p>
-            If latindictionary.io has helped you translate a tricky passage or
-            learn a new word, please consider making a small donation to keep us
-            running.
+            Now, more than four years later as a freshman in college, I still
+            work on it as a labor of love. All site expenses — hosting,
+            databases, and everything else — are covered out of my pocket. Over
+            99% of our users don&apos;t contribute, but if only 1% of our users
+            donated $1, we would be able to cover our expenses and eventually go{" "}
+            <b>ad-free</b>.
           </p>
         </div>
 
