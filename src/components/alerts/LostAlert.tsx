@@ -44,7 +44,15 @@ export const LostAlert = ({ isOpen, solution }: Props) => {
             >
               latindictionary.io
             </a>
-            .
+            . Try another game:{" "}
+            <a
+              href="https://connections.latindictionary.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline font-bold hover:text-gray-700"
+            >
+              Conexus
+            </a>
           </p>
         </div>
       </div>

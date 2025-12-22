@@ -42,6 +42,17 @@ export const WinModal = ({
             </a>
             .
           </div>
+          <div className="mt-4 text-sm dark:text-white">
+            Try another game:{" "}
+            <a
+              href="https://connections.latindictionary.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold underline hover:opacity-80"
+            >
+              Conexus
+            </a>
+          </div>
         </div>
       </div>
       <div className="mt-5 sm:mt-6">

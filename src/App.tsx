@@ -17,6 +17,7 @@ import { WinModal } from "./components/modals/WinModal";
 import { SignupModal } from "./components/modals/SignupModal";
 import { StatsModal } from "./components/modals/StatsModal";
 import { DonationModal } from "./components/modals/DonationModal";
+import { Footer } from "./components/Footer";
 import { ThemeContext } from "./ThemeProvider";
 import {
   isWordInWordList,
@@ -277,6 +278,8 @@ function App() {
             Restart
           </button>
         </div>
+
+        <Footer />
 
         <Alert message="Not enough letters" isOpen={alerts.notEnoughLetters} />
         <Alert message="Word not found" isOpen={alerts.wordNotFound} />
