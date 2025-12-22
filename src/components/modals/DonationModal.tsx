@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BaseModal } from "./BaseModal";
 
 const STORAGE_KEY = "donation_popup_seen";
-const DAYS_TO_WAIT = 3;
+const DAYS_TO_WAIT = 5;
 const STRIPE_DONATE_LINK = "https://donate.stripe.com/eVq8wO1NTc3W8TRg4gaIM00";
 
 export const DonationModal = () => {
