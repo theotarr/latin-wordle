@@ -1,10 +1,8 @@
 import {
   InformationCircleIcon,
   ChartBarIcon,
-  ArrowPathIcon,
   SunIcon,
   MoonIcon,
-  Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 import { useState, useEffect, useContext, useMemo } from "react";
 import { Alert } from "./components/alerts/Alert";
@@ -14,7 +12,6 @@ import { Keyboard } from "./components/keyboard/Keyboard";
 import { AboutModal } from "./components/modals/AboutModal";
 import { InfoModal } from "./components/modals/InfoModal";
 import { WinModal } from "./components/modals/WinModal";
-import { SignupModal } from "./components/modals/SignupModal";
 import { StatsModal } from "./components/modals/StatsModal";
 import { DonationModal } from "./components/modals/DonationModal";
 import { Footer } from "./components/Footer";
@@ -256,10 +253,6 @@ function App() {
         <AboutModal
           isOpen={modals.about}
           handleClose={() => setModals((prev) => ({ ...prev, about: false }))}
-        />
-        <SignupModal
-          isOpen={modals.signup}
-          handleClose={() => setModals((prev) => ({ ...prev, signup: false }))}
         />
         <DonationModal />
         <div className="flex justify-center gap-3 mt-8">
