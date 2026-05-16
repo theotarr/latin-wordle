@@ -1,6 +1,5 @@
 > [!IMPORTANT]
-> This repository has moved to the Latin Dictionary monorepo:
-> https://github.com/theotarr/latindictionary.io
+> This repository has moved to the Latin Dictionary monorepo.
 >
 > This standalone repo is archived and read-only. Use
 > `apps/latin-wordle` in the monorepo for all future Latin Wordle changes.
