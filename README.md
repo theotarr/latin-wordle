@@ -1,3 +1,10 @@
+> [!IMPORTANT]
+> This repository has moved to the Latin Dictionary monorepo:
+> https://github.com/theotarr/latindictionary.io
+>
+> This standalone repo is archived and read-only. Use
+> `apps/latin-wordle` in the monorepo for all future Latin Wordle changes.
+
 <p align="center">
     <img src="https://www.latindictionary.io/mstile-150x150.png" width=200 height=200/>
 </p>
